@@ -8,6 +8,7 @@ import {PoolKey} from "v4-core/src/types/PoolKey.sol";
 import {PoolId, PoolIdLibrary} from "v4-core/src/types/PoolId.sol";
 import {BalanceDelta} from "v4-core/src/types/BalanceDelta.sol";
 import {BeforeSwapDelta, BeforeSwapDeltaLibrary} from "v4-core/src/types/BeforeSwapDelta.sol";
+import {MEVengersAgentRegistry} from "./MEVengersAgentRegistry.sol";
 import {SwapParams} from "v4-core/src/types/PoolOperation.sol";
 import {Currency} from "v4-core/src/types/Currency.sol";
 
@@ -39,6 +40,9 @@ contract MEVengersHook is BaseHook {
     // Authorised cross-chain operator from Reactive Network
     address public reactiveSentinel;
     address public owner;
+
+    // ERC-8004 Agent Registry
+    MEVengersAgentRegistry public agentRegistry;
 
     // Pool-specific auction state
     mapping(PoolId => AuctionState) public auctions;
@@ -138,10 +142,27 @@ contract MEVengersHook is BaseHook {
         uint256 insurance = (pot * INSURANCE_SPLIT) / 100;
         mevInsuranceFund[poolId] += insurance;
 
-        // Boost winner's reputation
+        // Boost winner's reputation (in-contract mapping)
         if (winner != address(0)) {
             guardianReputation[winner] += 10;
             emit GuardianReputationUpdated(winner, guardianReputation[winner]);
+
+            // ERC-8004: Record on-chain feedback for the winning Guardian
+            if (address(agentRegistry) != address(0)) {
+                uint256 agentId = agentRegistry.getAgentId(winner);
+                if (agentId > 0) {
+                    agentRegistry.giveFeedback(
+                        agentId,
+                        int128(int256(pot)),  // Positive volume = successful protection
+                        18,
+                        "auction_win",
+                        "human_guardian",
+                        "",
+                        "",
+                        bytes32(0)
+                    );
+                }
+            }
         }
 
         // Unlock the pool
@@ -151,6 +172,11 @@ contract MEVengersHook is BaseHook {
 
         emit AuctionSettled(poolId, winner, winningFeeBps, insurance);
         emit PoolUnlocked(poolId);
+    }
+
+    function setAgentRegistry(address _registry) external {
+        if (msg.sender != owner) revert OnlySentinelOrOwner();
+        agentRegistry = MEVengersAgentRegistry(_registry);
     }
 
     /// @notice Allows Reactive Sentinel to update guardian scores cross-chain.

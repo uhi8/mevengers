@@ -20,6 +20,8 @@ contract MEVAuctionSentinel is AbstractReactive {
 
     address public owner;
     address public mevHook;             // MEVengersHook on Unichain
+    address public agentRegistry;       // MEVengersAgentRegistry on Unichain
+    address public aiAgentAddress;      // The registered AI agent wallet address
 
     uint256 public constant UNICHAIN_ID = 1301;     // Unichain Mainnet
     uint256 public constant UNICHAIN_SEPOLIA_ID = 1301; // Unichain Sepolia testnet
@@ -40,9 +42,11 @@ contract MEVAuctionSentinel is AbstractReactive {
     //                     CONSTRUCTOR
     // =========================================================
 
-    constructor(address _mevHook) AbstractReactive() {
+    constructor(address _mevHook, address _agentRegistry, address _aiAgent) AbstractReactive() {
         owner = msg.sender;
         mevHook = _mevHook;
+        agentRegistry = _agentRegistry;
+        aiAgentAddress = _aiAgent;
     }
 
     // =========================================================
@@ -89,6 +93,37 @@ contract MEVAuctionSentinel is AbstractReactive {
                 poolId
             );
             emitCallback(UNICHAIN_ID, mevHook, 500_000, lockPayload);
+
+            // STEP 2: ERC-8004 — Reward the AI Agent for the successful alert
+            // The AI Agent has a registered identity in MEVengersAgentRegistry.
+            // This records verifiable on-chain proof that the AI caught the MEV.
+            if (agentRegistry != address(0) && aiAgentAddress != address(0)) {
+                bytes memory feedbackPayload = abi.encodeWithSignature(
+                    "giveFeedback(address,uint256,int128,uint8,string,string,string,string,bytes32)",
+                    aiAgentAddress,
+                    agentRegistry,
+                    int128(int256(mevScore)),   // score as the value
+                    0,
+                    "mev_block",                // tag1: what happened
+                    "pre_emptive_ai",           // tag2: who detected it
+                    "",
+                    "",
+                    bytes32(0)
+                );
+                // Call giveFeedback via the registry on Unichain
+                bytes memory registryPayload = abi.encodeWithSignature(
+                    "giveFeedbackByAddress(address,int128,uint8,string,string,string,string,bytes32)",
+                    aiAgentAddress,
+                    int128(int256(mevScore)),
+                    0,
+                    "mev_block",
+                    "pre_emptive_ai",
+                    "",
+                    "",
+                    bytes32(0)
+                );
+                emitCallback(UNICHAIN_ID, agentRegistry, 300_000, registryPayload);
+            }
 
             // Track auction end on Reactive side
             uint256 auctionEnd = block.timestamp + AUCTION_DURATION;

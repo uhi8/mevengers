@@ -17,6 +17,27 @@
 import { createPublicClient, http, parseAbiItem } from "viem";
 import type { PublicClient } from "viem";
 
+// ─── ERC-8004 Agent Registry ABI (minimal) ─────────────────────────
+const REGISTRY_ABI = [
+  {
+    type: "function",
+    name: "register",
+    inputs: [
+      { name: "_agentURI", type: "string" },
+      { name: "_type", type: "uint8" }, // 0 = Human, 1 = AI
+    ],
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "getAgentId",
+    inputs: [{ name: "_addr", type: "address" }],
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "view",
+  },
+] as const;
+
 // ─── Chain Configuration ────────────────────────────────────────────
 const UNICHAIN_RPC = process.env.UNICHAIN_RPC_URL || "https://mainnet.unichain.org";
 const MEV_HOOK_ADDRESS = (process.env.MEV_HOOK_ADDRESS || "0x") as `0x${string}`;
