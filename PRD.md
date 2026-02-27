@@ -1,4 +1,4 @@
-# Product Requirements Document (PRD): MEVengers (Reactive Revamp)
+# Product Requirements Document (PRD): MEVengers
 
 ## 1. Executive Summary
 **Project Name**: MEVengers
