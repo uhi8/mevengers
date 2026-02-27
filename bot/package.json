@@ -1,0 +1,16 @@
+{
+    "name": "mevengers-bot",
+    "version": "1.0.0",
+    "description": "MEVengers Telegram Bot — Your portal to autonomous MEV protection on Unichain.",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "node --watch src/index.js"
+    },
+    "dependencies": {
+        "viem": "^2.17.0",
+        "node-telegram-bot-api": "^0.66.0",
+        "dotenv": "^16.4.5",
+        "better-sqlite3": "^9.6.0"
+    }
+}

@@ -1,0 +1,20 @@
+# Build artifacts
+contracts/out/
+contracts/cache/
+contracts/.forge-cache/
+
+# Node deps
+bot/node_modules/
+agent/node_modules/
+agent/dist/
+
+# DB
+bot/*.db
+agent/*.db
+
+# Env
+.env
+.env.local
+
+# Foundry
+foundry.lock
