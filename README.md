@@ -1,4 +1,4 @@
-# MEVengers 🚀 (Reactive Revamp)
+# MEVengers 
 
 MEVengers is the world's first **autonomous** MEV protection system leveraging **Uniswap V4**, **Unichain**, and the **Reactive Network** to intelligently detect and neutralize MEV attacks.
 
