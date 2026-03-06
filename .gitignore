@@ -10,11 +10,14 @@ agent/dist/
 
 # DB
 bot/*.db
+bot/mevengers_db.json
+bot/*.txt
 agent/*.db
 
 # Env
 .env
 .env.local
+.env.example
 
 # Foundry
 foundry.lock

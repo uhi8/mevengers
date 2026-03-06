@@ -5,12 +5,12 @@
     "main": "src/index.js",
     "scripts": {
         "start": "node src/index.js",
-        "dev": "node --watch src/index.js"
+        "dev": "node --watch src/index.js",
+        "relay": "node src/relayer.js"
     },
     "dependencies": {
         "viem": "^2.17.0",
         "node-telegram-bot-api": "^0.66.0",
-        "dotenv": "^16.4.5",
-        "better-sqlite3": "^9.6.0"
+        "dotenv": "^16.4.5"
     }
 }
