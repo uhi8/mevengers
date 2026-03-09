@@ -10,3 +10,6 @@
 ## 2026-03-08
 - Expanded bot capabilities with wallet funding and key generation tools.
 - Refined rebalancing logic for automated liquidity management.
+## 2026-03-09
+- Migrated smart contract suite into dedicated 'contracts/' directory.
+- Configured Foundry environment and submodule remappings.

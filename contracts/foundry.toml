@@ -5,16 +5,17 @@ libs = ["lib"]
 test = "test"
 script = "script"
 solc_version = "0.8.26"
-
-[profile.default.dependencies]
-forge-std = { git = "https://github.com/foundry-rs/forge-std", tag = "v1.9.3" }
-"v4-core" = { git = "https://github.com/Uniswap/v4-core", tag = "1.0.0" }
-"v4-periphery" = { git = "https://github.com/Uniswap/v4-periphery", tag = "1.0.0" }
-"@openzeppelin/contracts" = { git = "https://github.com/OpenZeppelin/openzeppelin-contracts", tag = "v5.0.2" }
+via_ir = true
+optimizer = true
+optimizer_runs = 200
 
 [rpc_endpoints]
-unichain = "${UNICHAIN_RPC_URL}"
 unichain_sepolia = "${UNICHAIN_SEPOLIA_RPC_URL}"
+unichain = "${UNICHAIN_RPC_URL}"
+reactive = "${REACTIVE_RPC_URL}"
+
+[etherscan]
+unichain_sepolia = { key = "${ETHERSCAN_API_KEY}", url = "https://api-sepolia.uniscan.xyz/api" }
 
 [profile.default.fuzz]
 runs = 1000
