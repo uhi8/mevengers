@@ -2,7 +2,7 @@
 pragma solidity ^0.8.26;
 
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
-import {PoolId} from "v4-core/src/types/PoolId.sol";
+import {PoolId} from "@uniswap/v4-core/src/types/PoolId.sol";
 
 /// @title MEVInsuranceFund
 /// @notice Custodies the community insurance pot for each pool and handles victim compensation.

@@ -13,3 +13,7 @@
 ## 2026-03-09
 - Migrated smart contract suite into dedicated 'contracts/' directory.
 - Configured Foundry environment and submodule remappings.
+## 2026-03-10
+- Enhanced MEVengersHook core logic with V4 callback hooks.
+- Implemented MEVAuctionSentinel for autonomous pool locking.
+- Developed MEVInsuranceFund logic.

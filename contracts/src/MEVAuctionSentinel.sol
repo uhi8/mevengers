@@ -61,7 +61,7 @@ contract MEVAuctionSentinel is AbstractReactive {
         // Topic 0 = keccak256("MEVAlert(bytes32,uint256,address,uint256)")
         bytes memory payload = abi.encodeWithSignature(
             "subscribe(uint256,address,uint256,uint256,uint256,uint256)",
-            UNICHAIN_ID,
+            0, // All chains (fallback)
             mevHook,
             uint256(keccak256("MEVAlert(bytes32,uint256,address,uint256)")),
             REACTIVE_IGNORE,

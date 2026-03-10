@@ -1,16 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
-import {BaseHook} from "v4-periphery/src/utils/BaseHook.sol";
-import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
-import {Hooks} from "v4-core/src/libraries/Hooks.sol";
-import {PoolKey} from "v4-core/src/types/PoolKey.sol";
-import {PoolId, PoolIdLibrary} from "v4-core/src/types/PoolId.sol";
-import {BalanceDelta} from "v4-core/src/types/BalanceDelta.sol";
-import {BeforeSwapDelta, BeforeSwapDeltaLibrary} from "v4-core/src/types/BeforeSwapDelta.sol";
+import {BaseHook} from "uniswap-hooks/base/BaseHook.sol";
+import {IPoolManager} from "@uniswap/v4-core/src/interfaces/IPoolManager.sol";
+import {Hooks} from "@uniswap/v4-core/src/libraries/Hooks.sol";
+import {PoolKey} from "@uniswap/v4-core/src/types/PoolKey.sol";
+import {PoolId, PoolIdLibrary} from "@uniswap/v4-core/src/types/PoolId.sol";
+import {BalanceDelta} from "@uniswap/v4-core/src/types/BalanceDelta.sol";
+import {
+    BeforeSwapDelta,
+    BeforeSwapDeltaLibrary
+} from "@uniswap/v4-core/src/types/BeforeSwapDelta.sol";
 import {MEVengersAgentRegistry} from "./MEVengersAgentRegistry.sol";
-import {SwapParams} from "v4-core/src/types/PoolOperation.sol";
-import {Currency} from "v4-core/src/types/Currency.sol";
+import {MEVInsuranceFund} from "./MEVInsuranceFund.sol";
+import {Currency} from "@uniswap/v4-core/src/types/Currency.sol";
 
 /// @title MEVengersHook
 /// @notice Uniswap V4 Hook for real-time MEV detection and autonomous auction management.
@@ -24,12 +27,12 @@ contract MEVengersHook is BaseHook {
     // =========================================================
 
     struct AuctionState {
-        bool locked;            // Is the pool currently locked for extraction?
-        uint256 auctionStart;   // Timestamp when auction began
-        uint256 auctionEnd;     // Timestamp when the Reactive Sentinel will settle
+        bool locked; // Is the pool currently locked for extraction?
+        uint256 auctionStart; // Timestamp when auction began
+        uint256 auctionEnd; // Timestamp when the Reactive Sentinel will settle
         address highestBidder;
-        uint256 highestBid;     // In Wei
-        uint256 insuranceFund;  // Accumulated insurance for this auction
+        uint256 highestBid; // In Wei
+        uint24 winningFee; // The fee bid by the winner (bps)
     }
 
     struct SwapRecord {
@@ -44,14 +47,14 @@ contract MEVengersHook is BaseHook {
     // ERC-8004 Agent Registry
     MEVengersAgentRegistry public agentRegistry;
 
+    // Insurance Fund (where 50% of winnings go)
+    address public insuranceFund;
+
     // Pool-specific auction state
     mapping(PoolId => AuctionState) public auctions;
 
     // MEV detection: track the last few swaps per pool
     mapping(PoolId => SwapRecord) public lastSwap;
-
-    // Insurance fund per pool (separate for explicit ERC-20 accounting)
-    mapping(PoolId => uint256) public mevInsuranceFund;
 
     // Reputation scores for Guardians (managed by Sentinel)
     mapping(address => uint256) public guardianReputation;
@@ -60,21 +63,36 @@ contract MEVengersHook is BaseHook {
     //                         CONSTANTS
     // =========================================================
 
-    uint256 public constant MEV_SCORE_THRESHOLD = 70;    // Out of 100
+    uint256 public constant MEV_SCORE_THRESHOLD = 70; // Out of 100
     uint256 public constant AUCTION_DURATION = 3 minutes;
-    uint24  public constant DEFAULT_FEE = 3000;           // 0.3%
-    uint24  public constant LOCK_FEE = 50000;             // 5.0% — applied during lock
-    uint24  public constant GUARDIAN_FEE = 100;           // 0.01% — for high-rep participants
-    uint256 public constant INSURANCE_SPLIT = 50;         // 50% of winning bid to victims
+    uint24 public constant DEFAULT_FEE = 3000; // 0.3%
+    uint24 public constant LOCK_FEE = 50000; // 5.0% — applied during lock
+    uint24 public constant GUARDIAN_FEE = 100; // 0.01% — for high-rep participants
+    uint256 public constant INSURANCE_SPLIT = 50; // 50% of winning bid to victims
 
     // =========================================================
     //                         EVENTS
     // =========================================================
 
-    event MEVAlert(PoolId indexed poolId, uint256 mevScore, address indexed suspectedAttacker, uint256 timestamp);
+    event MEVAlert(
+        PoolId indexed poolId,
+        uint256 mevScore,
+        address indexed suspectedAttacker,
+        uint256 timestamp
+    );
     event PoolLocked(PoolId indexed poolId, uint256 auctionEnd);
-    event BidPlaced(PoolId indexed poolId, address indexed bidder, uint256 amount);
-    event AuctionSettled(PoolId indexed poolId, address indexed winner, uint24 winningFee, uint256 insurancePaid);
+    event BidPlaced(
+        PoolId indexed poolId,
+        address indexed bidder,
+        uint256 amount,
+        uint24 fee
+    );
+    event AuctionSettled(
+        PoolId indexed poolId,
+        address indexed winner,
+        uint24 winningFee,
+        uint256 insurancePaid
+    );
     event PoolUnlocked(PoolId indexed poolId);
     event GuardianReputationUpdated(address indexed guardian, uint256 score);
 
@@ -91,7 +109,10 @@ contract MEVengersHook is BaseHook {
     //                       CONSTRUCTOR
     // =========================================================
 
-    constructor(IPoolManager _poolManager, address _owner) BaseHook(_poolManager) {
+    constructor(
+        IPoolManager _poolManager,
+        address _owner
+    ) BaseHook(_poolManager) {
         owner = _owner;
     }
 
@@ -100,7 +121,8 @@ contract MEVengersHook is BaseHook {
     // =========================================================
 
     modifier onlySentinelOrOwner() {
-        if (msg.sender != reactiveSentinel && msg.sender != owner) revert OnlySentinelOrOwner();
+        if (msg.sender != reactiveSentinel && msg.sender != owner)
+            revert OnlySentinelOrOwner();
         _;
     }
 
@@ -114,6 +136,11 @@ contract MEVengersHook is BaseHook {
         reactiveSentinel = _sentinel;
     }
 
+    function setInsuranceFund(address _fund) external {
+        if (msg.sender != owner) revert OnlySentinelOrOwner();
+        insuranceFund = _fund;
+    }
+
     /// @notice Called by Reactive Sentinel when it detects an MEVAlert.
     ///         Locks the pool, blocking further MEV extraction, and starts the auction.
     function lockPool(PoolId poolId) external onlySentinelOrOwner {
@@ -123,6 +150,7 @@ contract MEVengersHook is BaseHook {
         state.auctionEnd = block.timestamp + AUCTION_DURATION;
         state.highestBidder = address(0);
         state.highestBid = 0;
+        state.winningFee = DEFAULT_FEE;
 
         emit PoolLocked(poolId, state.auctionEnd);
     }
@@ -131,16 +159,33 @@ contract MEVengersHook is BaseHook {
     ///         Applies the winning fee, disburses the insurance fund, and unlocks the pool.
     /// @param poolId The pool that was locked.
     /// @param winningFeeBps The fee (in bps) set by the community winning bid.
-    function settleAuctionAndUnlock(PoolId poolId, uint24 winningFeeBps) external onlySentinelOrOwner {
+    function settleAuctionAndUnlock(
+        PoolId poolId,
+        uint24 winningFeeBps
+    ) external onlySentinelOrOwner {
         AuctionState storage state = auctions[poolId];
         if (!state.locked) revert PoolNotLocked();
 
         address winner = state.highestBidder;
         uint256 pot = state.highestBid;
 
+        // If no bids were placed, use the default fee provided by Sentinel
+        if (winner == address(0)) {
+            state.winningFee = winningFeeBps;
+        }
+
+        uint24 finalFee = state.winningFee;
+
         // 50% to the insurance fund. Winner keeps the remaining as a protection reward.
         uint256 insurance = (pot * INSURANCE_SPLIT) / 100;
-        mevInsuranceFund[poolId] += insurance;
+
+        if (insuranceFund != address(0) && insurance > 0) {
+            // Transfer to the specific Insurance Fund contract
+            (bool success, ) = insuranceFund.call{value: insurance}(
+                abi.encodeWithSignature("deposit(bytes32)", poolId)
+            );
+            require(success, "Insurance deposit failed");
+        }
 
         // Boost winner's reputation (in-contract mapping)
         if (winner != address(0)) {
@@ -153,7 +198,7 @@ contract MEVengersHook is BaseHook {
                 if (agentId > 0) {
                     agentRegistry.giveFeedback(
                         agentId,
-                        int128(int256(pot)),  // Positive volume = successful protection
+                        int128(int256(pot)), // Positive volume = successful protection
                         18,
                         "auction_win",
                         "human_guardian",
@@ -170,7 +215,7 @@ contract MEVengersHook is BaseHook {
         state.highestBidder = address(0);
         state.highestBid = 0;
 
-        emit AuctionSettled(poolId, winner, winningFeeBps, insurance);
+        emit AuctionSettled(poolId, winner, finalFee, insurance);
         emit PoolUnlocked(poolId);
     }
 
@@ -180,7 +225,10 @@ contract MEVengersHook is BaseHook {
     }
 
     /// @notice Allows Reactive Sentinel to update guardian scores cross-chain.
-    function setGuardianReputation(address guardian, uint256 score) external onlySentinelOrOwner {
+    function setGuardianReputation(
+        address guardian,
+        uint256 score
+    ) external onlySentinelOrOwner {
         guardianReputation[guardian] = score;
         emit GuardianReputationUpdated(guardian, score);
     }
@@ -191,7 +239,9 @@ contract MEVengersHook is BaseHook {
 
     /// @notice Community members bid in ETH for the protective fee level during an active auction.
     ///         The fee bid is the protection level they want to enforce on attacked swappers.
-    function placeBid(PoolId poolId) external payable {
+    /// @param poolId The pool being defended.
+    /// @param feeBps The fee (in bps) the bidder wants to apply to the pool (e.g. 500 = 0.5%).
+    function placeBid(PoolId poolId, uint24 feeBps) external payable {
         AuctionState storage state = auctions[poolId];
         if (!state.locked) revert AuctionNotActive();
         if (block.timestamp > state.auctionEnd) revert AuctionNotActive();
@@ -208,31 +258,38 @@ contract MEVengersHook is BaseHook {
 
         state.highestBidder = msg.sender;
         state.highestBid = msg.value;
+        state.winningFee = feeBps;
 
-        emit BidPlaced(poolId, msg.sender, msg.value);
+        emit BidPlaced(poolId, msg.sender, msg.value, feeBps);
     }
 
     // =========================================================
     //                     HOOK PERMISSIONS
     // =========================================================
 
-    function getHookPermissions() public pure override returns (Hooks.Permissions memory) {
-        return Hooks.Permissions({
-            beforeInitialize: false,
-            afterInitialize: false,
-            beforeAddLiquidity: false,
-            afterAddLiquidity: false,
-            beforeRemoveLiquidity: false,
-            afterRemoveLiquidity: false,
-            beforeSwap: true,   // MEV detection
-            afterSwap: true,    // Record swap for next MEV score calc
-            beforeDonate: false,
-            afterDonate: false,
-            beforeSwapReturnDelta: false,
-            afterSwapReturnDelta: false,
-            afterAddLiquidityReturnDelta: false,
-            afterRemoveLiquidityReturnDelta: false
-        });
+    function getHookPermissions()
+        public
+        pure
+        override
+        returns (Hooks.Permissions memory)
+    {
+        return
+            Hooks.Permissions({
+                beforeInitialize: false,
+                afterInitialize: false,
+                beforeAddLiquidity: false,
+                afterAddLiquidity: false,
+                beforeRemoveLiquidity: false,
+                afterRemoveLiquidity: false,
+                beforeSwap: true, // MEV detection
+                afterSwap: true, // Record swap for next MEV score calc
+                beforeDonate: false,
+                afterDonate: false,
+                beforeSwapReturnDelta: false,
+                afterSwapReturnDelta: false,
+                afterAddLiquidityReturnDelta: false,
+                afterRemoveLiquidityReturnDelta: false
+            });
     }
 
     // =========================================================
@@ -243,7 +300,7 @@ contract MEVengersHook is BaseHook {
     function _beforeSwap(
         address sender,
         PoolKey calldata key,
-        SwapParams calldata params,
+        IPoolManager.SwapParams calldata params,
         bytes calldata
     ) internal override returns (bytes4, BeforeSwapDelta, uint24) {
         PoolId poolId = key.toId();
@@ -261,7 +318,11 @@ contract MEVengersHook is BaseHook {
                 fee = LOCK_FEE;
             }
 
-            return (BaseHook.beforeSwap.selector, BeforeSwapDeltaLibrary.ZERO_DELTA, fee | 0x800000);
+            return (
+                BaseHook.beforeSwap.selector,
+                BeforeSwapDeltaLibrary.ZERO_DELTA,
+                fee | 0x800000
+            );
         }
 
         // --- MEV Score Calculation ---
@@ -271,17 +332,29 @@ contract MEVengersHook is BaseHook {
             emit MEVAlert(poolId, mevScore, tx.origin, block.timestamp);
             // Sentinel will pick up this event on Reactive Network
             // and immediately call back lockPool(). Until then, apply elevated fee.
-            return (BaseHook.beforeSwap.selector, BeforeSwapDeltaLibrary.ZERO_DELTA, LOCK_FEE | 0x800000);
+            return (
+                BaseHook.beforeSwap.selector,
+                BeforeSwapDeltaLibrary.ZERO_DELTA,
+                LOCK_FEE | 0x800000
+            );
         }
 
-        return (BaseHook.beforeSwap.selector, BeforeSwapDeltaLibrary.ZERO_DELTA, DEFAULT_FEE | 0x800000);
+        // Use the established winning fee if available, otherwise default
+        uint24 activeFee = state.winningFee > 0
+            ? state.winningFee
+            : DEFAULT_FEE;
+        return (
+            BaseHook.beforeSwap.selector,
+            BeforeSwapDeltaLibrary.ZERO_DELTA,
+            activeFee | 0x800000
+        );
     }
 
     /// @notice Records swap data to improve future MEV score calculations.
     function _afterSwap(
         address,
         PoolKey calldata key,
-        SwapParams calldata params,
+        IPoolManager.SwapParams calldata params,
         BalanceDelta,
         bytes calldata
     ) internal override returns (bytes4, int128) {
@@ -302,7 +375,7 @@ contract MEVengersHook is BaseHook {
     ///      2) High swap magnitude (absolute value)
     function _calculateMevScore(
         PoolId poolId,
-        SwapParams calldata params
+        IPoolManager.SwapParams calldata params
     ) internal view returns (uint256 score) {
         SwapRecord storage prev = lastSwap[poolId];
         score = 0;
@@ -333,11 +406,14 @@ contract MEVengersHook is BaseHook {
     //                    VIEW HELPERS
     // =========================================================
 
-    function getAuction(PoolId poolId) external view returns (AuctionState memory) {
+    function getAuction(
+        PoolId poolId
+    ) external view returns (AuctionState memory) {
         return auctions[poolId];
     }
 
     function getInsuranceFund(PoolId poolId) external view returns (uint256) {
-        return mevInsuranceFund[poolId];
+        if (insuranceFund == address(0)) return 0;
+        return MEVInsuranceFund(payable(insuranceFund)).fundBalance(poolId);
     }
 }
