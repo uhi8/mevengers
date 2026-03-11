@@ -17,3 +17,6 @@
 - Enhanced MEVengersHook core logic with V4 callback hooks.
 - Implemented MEVAuctionSentinel for autonomous pool locking.
 - Developed MEVInsuranceFund logic.
+## 2026-03-11
+- Created deployment scripts for Unichain Sepolia and Reactive Network.
+- Captured testnet deployment broadcast logs.
