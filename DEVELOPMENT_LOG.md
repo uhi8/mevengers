@@ -20,3 +20,6 @@
 ## 2026-03-11
 - Created deployment scripts for Unichain Sepolia and Reactive Network.
 - Captured testnet deployment broadcast logs.
+## 2026-03-12
+- Expanded integration test suite for E2E validation.
+- Documented project architecture in README and PRD.
