@@ -135,6 +135,20 @@ contract MEVengersAgentRegistry is Ownable, ERC721URIStorage {
         require(authorisedCallers[msg.sender] || msg.sender == owner(), "Not authorised");
         require(_ownerOf(agentId) != address(0), "Agent not found");
 
+        _storeFeedback(agentId, value, valueDecimals, tag1, tag2, endpoint, feedbackURI, feedbackHash);
+    }
+
+    function _storeFeedback(
+        uint256 agentId,
+        int128 value,
+        uint8 valueDecimals,
+        string calldata tag1,
+        string calldata tag2,
+        string calldata endpoint,
+        string calldata feedbackURI,
+        bytes32 feedbackHash
+    ) internal {
+
         Feedback memory fb = Feedback({
             client: msg.sender,
             value: value,
@@ -180,7 +194,7 @@ contract MEVengersAgentRegistry is Ownable, ERC721URIStorage {
         uint256 agentId = addressToAgentId[agentAddress];
         require(agentId > 0, "Agent not registered");
 
-        this.giveFeedback(agentId, value, valueDecimals, tag1, tag2, endpoint, feedbackURI, feedbackHash);
+        _storeFeedback(agentId, value, valueDecimals, tag1, tag2, endpoint, feedbackURI, feedbackHash);
     }
 
     // ─── Aggregation Views ─────────────────────────────────────────

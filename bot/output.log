@@ -1,0 +1,1558 @@
+🔍 Starting MEVengers blockchain event monitoring...
+📡 Monitoring Hook: 0x756751bE0FD74cdbB7af4410ca3aB4C02372c0c0
+🤖 MEVengers Bot is running...
+📝 Received PoolLocked log
+🔒 Pool Locked: 0x0e9389725e5b231e3291b07d89410783a2f18cfc5a36b080c9b4e806a13b189a
+⏱️ Fallback settlement scheduled for 0x0e9389725e5b231e3291b07d89410783a2f18cfc5a36b080c9b4e806a13b189a in ~181s
+💓 Heartbeat...
+🔹 Button Click: confirm_bid_0x0e938972_0.0000001_3000 from BOB
+⏳ Submitting bid for BOB on pool 0x0e9389725e5b231e3291b07d89410783a2f18cfc5a36b080c9b4e806a13b189a (Fee: 30%)...
+  🔬 Simulating bid for 0x7b477632D02D113121CeC500100a0266840283EC...
+  📡 Broadcasting tx...
+✅ Bid Successful: 0xf7f5b589a183b90d75f59472ea7d6094c5c95569eb05bd31f0ffac4a98694998
+🔹 Button Click: confirm_bid_0x0e938972_0.0000001_3000 from ALICE
+⏳ Submitting bid for ALICE on pool 0x0e9389725e5b231e3291b07d89410783a2f18cfc5a36b080c9b4e806a13b189a (Fee: 30%)...
+  🔬 Simulating bid for 0x7e63C0B7dFBb82bE01d9B7Bf01D33484655e7769...
+  📡 Broadcasting tx...
+💓 Heartbeat...
+💓 Heartbeat...
+🚨 Running fallback settle for 0x0e9389725e5b231e3291b07d89410783a2f18cfc5a36b080c9b4e806a13b189a (fee=3000)...
+🏁 Fallback settlement submitted: 0xd9c9f0862ceef918f5b55190f5ca962837c7e8304733c9b64613c8484f970b05
+📝 Received AuctionSettled log
+🏁 Auction Settled: Pool 0x0e9389725e5b231e3291b07d89410783a2f18cfc5a36b080c9b4e806a13b189a, Winner 0x7b477632D02D113121CeC500100a0266840283EC
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+❌ Telegram polling error: EFATAL: Error: read ETIMEDOUT
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+💓 Heartbeat...
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+💓 Heartbeat...
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Watch Error: HttpRequestError: HTTP request failed.
+
+URL: https://sepolia.unichain.org/
+Request body: {"method":"eth_blockNumber"}
+
+Details: fetch failed
+Version: viem@2.46.3
+    at Object.request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:83:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fn (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:45:25)
+    at async request (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/clients/transports/http.js:49:45)
+    at async delay.count.count (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/buildRequest.js:32:24)
+    at async attemptRetry (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withRetry.js:15:30) {
+  details: 'fetch failed',
+  docsPath: undefined,
+  metaMessages: [
+    'URL: https://sepolia.unichain.org/',
+    'Request body: {"method":"eth_blockNumber"}'
+  ],
+  shortMessage: 'HTTP request failed.',
+  version: '2.46.3',
+  body: { method: 'eth_blockNumber', params: undefined },
+  headers: undefined,
+  status: undefined,
+  url: 'https://sepolia.unichain.org/',
+  [cause]: TypeError: fetch failed
+      at node:internal/deps/undici/undici:16416:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async response.errorInstance.request_js_1.TimeoutError.body.body (/Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/rpc/http.js:44:38)
+      at async /Users/ucheekezie/Documents/web3work/uhi8/mevengers/bot/node_modules/viem/_cjs/utils/promise/withTimeout.js:21:25 {
+    [cause]: Error: getaddrinfo ENOTFOUND sepolia.unichain.org
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+      errno: -3008,
+      code: 'ENOTFOUND',
+      syscall: 'getaddrinfo',
+      hostname: 'sepolia.unichain.org'
+    }
+  }
+}
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+❌ Telegram polling error: EFATAL: Error: getaddrinfo ENOTFOUND api.telegram.org
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...
+💓 Heartbeat...

@@ -49,7 +49,8 @@ const HOOK_ABI = [
         inputs: [
             { name: 'poolId', type: 'bytes32', indexed: true },
             { name: 'bidder', type: 'address', indexed: true },
-            { name: 'amount', type: 'uint256' }
+            { name: 'amount', type: 'uint256' },
+            { name: 'fee', type: 'uint24' }
         ]
     },
     {
@@ -82,14 +83,25 @@ const HOOK_ABI = [
             { name: 'auctionEnd', type: 'uint256' },
             { name: 'highestBidder', type: 'address' },
             { name: 'highestBid', type: 'uint256' },
-            { name: 'insuranceFund', type: 'uint256' }
+            { name: 'winningFee', type: 'uint24' }
         ],
         stateMutability: 'view'
+    },
+    {
+        type: 'function',
+        name: 'settleAuctionAndUnlock',
+        inputs: [
+            { name: 'poolId', type: 'bytes32' },
+            { name: 'winningFeeBps', type: 'uint24' }
+        ],
+        outputs: [],
+        stateMutability: 'nonpayable'
     }
 ];
 
 // ─── Database Strategy ──────────────────────────────────────────────
 const DB_PATH = path.resolve(__dirname, "../mevengers_db.json");
+const BOT_LOCK_PATH = path.resolve(__dirname, "../.bot.lock");
 function loadDB() {
     if (!fs.existsSync(DB_PATH)) {
         fs.writeFileSync(DB_PATH, JSON.stringify({ users: {}, assignments: { ALICE: null, BOB: null } }));
@@ -100,13 +112,49 @@ function loadDB() {
 }
 function saveDB(data) { fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2)); }
 
+function isProcessRunning(pid) {
+    try {
+        process.kill(pid, 0);
+        return true;
+    } catch {
+        return false;
+    }
+}
+
+function acquireBotLock() {
+    if (fs.existsSync(BOT_LOCK_PATH)) {
+        const existingPid = parseInt(fs.readFileSync(BOT_LOCK_PATH, "utf8"), 10);
+        if (Number.isInteger(existingPid) && existingPid !== process.pid && isProcessRunning(existingPid)) {
+            throw new Error(`Another bot instance is already running (PID ${existingPid}). Stop it before starting a new one.`);
+        }
+
+        try { fs.unlinkSync(BOT_LOCK_PATH); } catch {}
+    }
+
+    fs.writeFileSync(BOT_LOCK_PATH, String(process.pid));
+
+    const cleanup = () => {
+        try {
+            if (!fs.existsSync(BOT_LOCK_PATH)) return;
+            const lockPid = parseInt(fs.readFileSync(BOT_LOCK_PATH, "utf8"), 10);
+            if (lockPid === process.pid) fs.unlinkSync(BOT_LOCK_PATH);
+        } catch {}
+    };
+
+    process.on("exit", cleanup);
+    process.on("SIGINT", () => { cleanup(); process.exit(0); });
+    process.on("SIGTERM", () => { cleanup(); process.exit(0); });
+}
+
 // ─── Blockchain Monitor Class ───
 class BlockchainMonitor {
-    constructor(publicClient, hookAddress, bot) {
+    constructor(publicClient, hookAddress, bot, settlementClient) {
         this.publicClient = publicClient;
         this.hookAddress = hookAddress;
         this.bot = bot;
+        this.settlementClient = settlementClient;
         this.activeAuctions = new Map();
+        this.settlementTimers = new Map();
     }
 
     getShortId(poolId) {
@@ -119,40 +167,25 @@ class BlockchainMonitor {
         console.log("🔍 Starting MEVengers blockchain event monitoring...");
         console.log(`📡 Monitoring Hook: ${this.hookAddress}`);
 
-        // 1. MEV Alerts
+        // Listen to all events on the contract to reduce RPC load
         this.publicClient.watchContractEvent({
             address: this.hookAddress,
             abi: HOOK_ABI,
-            eventName: 'MEVAlert',
             onLogs: (logs) => {
-                console.log(`📝 Received ${logs.length} MEVAlert logs`);
-                logs.forEach(log => this.handleMEVAlert(log.args));
+                logs.forEach(log => {
+                    if (log.eventName === 'MEVAlert') {
+                        console.log(`📝 Received MEVAlert log`);
+                        this.handleMEVAlert(log.args);
+                    } else if (log.eventName === 'PoolLocked') {
+                        console.log(`📝 Received PoolLocked log`);
+                        this.handlePoolLocked(log.args);
+                    } else if (log.eventName === 'AuctionSettled') {
+                        console.log(`📝 Received AuctionSettled log`);
+                        this.handleAuctionSettled(log.args);
+                    }
+                });
             },
-            onError: (err) => console.error("❌ MEVAlert Watch Error:", err)
-        });
-
-        // 2. Pool Locked
-        this.publicClient.watchContractEvent({
-            address: this.hookAddress,
-            abi: HOOK_ABI,
-            eventName: 'PoolLocked',
-            onLogs: (logs) => {
-                console.log(`📝 Received ${logs.length} PoolLocked logs`);
-                logs.forEach(log => this.handlePoolLocked(log.args));
-            },
-            onError: (err) => console.error("❌ PoolLocked Watch Error:", err)
-        });
-
-        // 3. Auction Settled
-        this.publicClient.watchContractEvent({
-            address: this.hookAddress,
-            abi: HOOK_ABI,
-            eventName: 'AuctionSettled',
-            onLogs: (logs) => {
-                console.log(`📝 Received ${logs.length} AuctionSettled logs`);
-                logs.forEach(log => this.handleAuctionSettled(log.args));
-            },
-            onError: (err) => console.error("❌ AuctionSettled Watch Error:", err)
+            onError: (err) => console.error("❌ Watch Error:", err)
         });
     }
 
@@ -160,11 +193,28 @@ class BlockchainMonitor {
         const { poolId, mevScore } = args;
         const shortId = this.getShortId(poolId);
         console.log(`🚨 MEV Alert: Pool ${poolId}, Score ${mevScore}`);
+
+        // Read AI Insights if available
+        let aiInsight = "";
+        try {
+            const insightsPath = path.resolve(__dirname, "../../mev_insights.json");
+            if (fs.existsSync(insightsPath)) {
+                const insights = JSON.parse(fs.readFileSync(insightsPath, "utf8"));
+                if (insights[poolId]) {
+                    const aiScore = insights[poolId].score;
+                    const rec = insights[poolId].recommendation;
+                    aiInsight = `\n🧠 **AI Confidence:** \`${aiScore}/100\`\n🤖 **Recommendation:** \`${rec}\``;
+                }
+            }
+        } catch (e) {
+            console.error("❌ Failed to read AI insights:", e.message);
+        }
+
         this.broadcastToUsers(`
 🚨 **MEV ALERT DETECTED!**
 
 Pool: \`${poolId}\`
-MEV Score: **${mevScore}/100**
+On-chain Score: **${mevScore}/100**${aiInsight}
 Status: 🔒 Reactive Sentinel locking pool...
 
 ⚡ *Guardian Action:* Bid now to earn rewards!
@@ -172,7 +222,7 @@ Status: 🔒 Reactive Sentinel locking pool...
     }
 
     async handlePoolLocked(args) {
-        const { poolId } = args;
+        const { poolId, auctionEnd } = args;
         const shortId = this.getShortId(poolId);
         console.log(`🔒 Pool Locked: ${poolId}`);
         this.broadcastToUsers(`
@@ -183,26 +233,46 @@ Status: 🛡️ Auction is LIVE.
 
 ⚡ *Guardian Action:* Place your protective bid now!
         `, shortId);
+
+    this.scheduleFallbackSettlement(poolId, auctionEnd);
     }
 
     async handleAuctionSettled(args) {
         const { poolId, winner, insurancePaid } = args;
         console.log(`🏁 Auction Settled: Pool ${poolId}, Winner ${winner}`);
+        this.clearSettlementTimer(poolId);
 
         const data = loadDB();
-        const user = Object.values(data.users).find(u => u.wallet_address.toLowerCase() === winner.toLowerCase());
+        const users = Object.values(data.users).filter(u => u.subscribed === 1);
+        const winnerUser = users.find(u => u.wallet_address.toLowerCase() === winner.toLowerCase());
+        const winnerLabel = winnerUser
+            ? `${winnerUser.persona} (\`${winnerUser.wallet_address}\`)`
+            : `\`${winner}\``;
 
-        if (user) {
-            this.bot.sendMessage(user.telegram_id, `
+        users.forEach((user) => {
+            const isWinner = user.wallet_address.toLowerCase() === winner.toLowerCase();
+
+            if (isWinner) {
+                this.bot.sendMessage(user.telegram_id, `
 🏆 **AUCTION SETTLED: YOU WON!**
 
 You successfully defended Pool \`${poolId.substring(0, 10)}...\`!
 💰 Insurance distributed: ${formatEther(insurancePaid)} ETH
 ⭐ Reputation gained: +10
+                `, { parse_mode: 'Markdown' });
+                return;
+            }
+
+            this.bot.sendMessage(user.telegram_id, `
+✅ **AUCTION SETTLED**
+
+Pool: \`${poolId.substring(0, 10)}...\`
+Winner: ${winnerLabel}
+Insurance distributed: ${formatEther(insurancePaid)} ETH
+
+Better luck next round ⚡
             `, { parse_mode: 'Markdown' });
-        } else {
-            this.broadcastToUsers(`✅ **Pool Secured:** \`${poolId.substring(0, 10)}...\` unlocked. Attack neutralized.`);
-        }
+        });
     }
 
     broadcastToUsers(text, shortId) {
@@ -212,11 +282,80 @@ You successfully defended Pool \`${poolId.substring(0, 10)}...\`!
             const opts = { parse_mode: 'Markdown' };
             if (shortId) {
                 opts.reply_markup = {
-                    inline_keyboard: [[{ text: "🎯 Quick Bid (0.0005 ETH, 0.3% fee)", callback_data: `confirm_bid_${shortId}_0.0005_3000` }]]
+                    inline_keyboard: [[{ text: "🎯 Quick Bid (0.0000001 ETH, 0.3% fee)", callback_data: `confirm_bid_${shortId}_0.0000001_3000` }]]
                 };
             }
             this.bot.sendMessage(u.telegram_id, text, opts);
         });
+    }
+
+    clearSettlementTimer(poolId) {
+        const key = poolId.toLowerCase();
+        const timer = this.settlementTimers.get(key);
+        if (timer) {
+            clearTimeout(timer);
+            this.settlementTimers.delete(key);
+        }
+    }
+
+    scheduleFallbackSettlement(poolId, auctionEnd) {
+        if (!this.settlementClient) return;
+
+        const now = Math.floor(Date.now() / 1000);
+        const endTs = Number(auctionEnd || 0n);
+        const delayMs = Math.max(5000, (endTs - now) * 1000 + 5000);
+
+        this.clearSettlementTimer(poolId);
+        console.log(`⏱️ Fallback settlement scheduled for ${poolId} in ~${Math.ceil(delayMs / 1000)}s`);
+
+        const timer = setTimeout(async () => {
+            await this.runFallbackSettlement(poolId);
+        }, delayMs);
+
+        this.settlementTimers.set(poolId.toLowerCase(), timer);
+    }
+
+    async runFallbackSettlement(poolId) {
+        if (!this.settlementClient) return;
+
+        try {
+            const auction = await this.publicClient.readContract({
+                address: this.hookAddress,
+                abi: HOOK_ABI,
+                functionName: 'auctions',
+                args: [poolId]
+            });
+
+            const locked = auction.locked ?? auction[0];
+            const auctionEnd = Number(auction.auctionEnd ?? auction[2] ?? 0n);
+            const winningFee = Number(auction.winningFee ?? auction[5] ?? 3000);
+            const now = Math.floor(Date.now() / 1000);
+
+            if (!locked) {
+                console.log(`✅ Auction already settled: ${poolId}`);
+                this.clearSettlementTimer(poolId);
+                return;
+            }
+
+            if (now < auctionEnd) {
+                console.log(`⏳ Auction still active for ${poolId}. Rescheduling fallback settle.`);
+                this.scheduleFallbackSettlement(poolId, BigInt(auctionEnd));
+                return;
+            }
+
+            console.log(`🚨 Running fallback settle for ${poolId} (fee=${winningFee})...`);
+            const txHash = await this.settlementClient.writeContract({
+                address: this.hookAddress,
+                abi: HOOK_ABI,
+                functionName: 'settleAuctionAndUnlock',
+                args: [poolId, winningFee]
+            });
+            console.log(`🏁 Fallback settlement submitted: ${txHash}`);
+            this.clearSettlementTimer(poolId);
+        } catch (e) {
+            console.error(`❌ Fallback settlement failed for ${poolId}:`, e.shortMessage || e.message);
+            this.scheduleFallbackSettlement(poolId, BigInt(Math.floor(Date.now() / 1000) + 15));
+        }
     }
 }
 
@@ -260,8 +399,36 @@ class ContractQueries {
 
 // ─── Main Bot Logic ───
 const publicClient = createPublicClient({ chain: UNICHAIN, transport: http(UNICHAIN_RPC) });
+if (!BOT_TOKEN || !MEV_HOOK_ADDRESS) {
+    console.error("❌ Missing TELEGRAM_BOT_TOKEN or MEV_HOOK_ADDRESS in .env");
+    process.exit(1);
+}
+
+try {
+    acquireBotLock();
+} catch (e) {
+    console.error(`❌ ${e.message}`);
+    process.exit(1);
+}
+
+const settlementClient = process.env.DEPLOYER_PRIVATE_KEY
+    ? createWalletClient({
+        account: privateKeyToAccount(process.env.DEPLOYER_PRIVATE_KEY),
+        chain: UNICHAIN,
+        transport: http(UNICHAIN_RPC)
+    })
+    : null;
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
-const monitor = new BlockchainMonitor(publicClient, MEV_HOOK_ADDRESS, bot);
+bot.on('polling_error', (err) => {
+    const msg = err?.message || String(err);
+    if (msg.includes('409 Conflict')) {
+        console.error('❌ Telegram polling conflict detected (409). Only one bot instance can run. Exiting this process.');
+        process.exit(1);
+    }
+    console.error('❌ Telegram polling error:', msg);
+});
+
+const monitor = new BlockchainMonitor(publicClient, MEV_HOOK_ADDRESS, bot, settlementClient);
 const queries = new ContractQueries(publicClient, MEV_HOOK_ADDRESS);
 
 bot.onText(/\/start/, (msg) => {
@@ -273,6 +440,7 @@ I monitor Uniswap V4 pools for MEV and help you defend them!
 📱 **Commands:**
 /connect - Connect your Guardian persona
 /balance - Check your persona's balance
+/status [poolId|shortId] - Check auction status
 /help - Show this message
 
 🚀 **Get started:** /connect
@@ -322,6 +490,74 @@ bot.onText(/\/balance/, async (msg) => {
     bot.sendMessage(msg.chat.id, `💰 **${user.persona} Balance:** ${formatEther(balance)} ETH`, { parse_mode: 'Markdown' });
 });
 
+bot.onText(/\/status(?:\s+(.+))?/, async (msg, match) => {
+    const rawArg = (match && match[1] ? match[1] : "").trim();
+
+    let poolId = null;
+    let shortId = null;
+
+    if (!rawArg) {
+        const entries = Array.from(monitor.activeAuctions.entries());
+        if (entries.length === 0) {
+            return bot.sendMessage(msg.chat.id, "ℹ️ No tracked auctions yet. Trigger one first, then run /status <shortId>.");
+        }
+
+        const latest = entries[entries.length - 1];
+        shortId = latest[0];
+        poolId = latest[1];
+    } else if (monitor.activeAuctions.has(rawArg)) {
+        shortId = rawArg;
+        poolId = monitor.activeAuctions.get(rawArg);
+    } else if (/^0x[0-9a-fA-F]{64}$/.test(rawArg)) {
+        poolId = rawArg;
+        shortId = rawArg.substring(0, 10);
+    } else {
+        const known = Array.from(monitor.activeAuctions.keys()).slice(-5);
+        return bot.sendMessage(
+            msg.chat.id,
+            `❌ Unknown pool id/short id: ${rawArg}\n\nTry: /status (latest) or /status 0x1234abcd...\nKnown short ids: ${known.length ? known.join(', ') : 'none yet'}`
+        );
+    }
+
+    try {
+        const auction = await queries.getAuction(poolId);
+        if (!auction) {
+            return bot.sendMessage(msg.chat.id, `❌ Could not fetch auction for ${poolId}`);
+        }
+
+        const locked = auction.locked ?? auction[0];
+        const auctionStart = Number(auction.auctionStart ?? auction[1] ?? 0n);
+        const auctionEnd = Number(auction.auctionEnd ?? auction[2] ?? 0n);
+        const highestBidder = auction.highestBidder ?? auction[3];
+        const highestBid = auction.highestBid ?? auction[4] ?? 0n;
+        const winningFee = Number(auction.winningFee ?? auction[5] ?? 0);
+        const now = Math.floor(Date.now() / 1000);
+        const remaining = Math.max(0, auctionEnd - now);
+        const isZeroAddress = highestBidder.toLowerCase() === '0x0000000000000000000000000000000000000000';
+
+        const text = `
+📊 **Auction Status**
+
+Pool: \`${poolId}\`
+Short ID: \`${shortId}\`
+Locked: ${locked ? '✅ Yes' : '❌ No'}
+Highest Bid: ${formatEther(highestBid)} ETH
+Highest Bidder: ${isZeroAddress ? 'None' : `\`${highestBidder}\``}
+Winning Fee: ${winningFee} bps (${(winningFee / 10000 * 100).toFixed(2)}%)
+Ends In: ${remaining}s
+
+Timestamps:
+• Start: ${auctionStart}
+• End: ${auctionEnd}
+• Now: ${now}
+        `;
+
+        return bot.sendMessage(msg.chat.id, text, { parse_mode: 'Markdown' });
+    } catch (e) {
+        return bot.sendMessage(msg.chat.id, `❌ Status error: ${e.shortMessage || e.message}`);
+    }
+});
+
 bot.on('callback_query', async (query) => {
     const chatId = query.message.chat.id;
     const telegramId = query.from.id.toString();
@@ -343,7 +579,49 @@ bot.on('callback_query', async (query) => {
         bot.editMessageText(`⏳ **Submitting bid for ${user.persona}...**`, { chat_id: chatId, message_id: query.message.message_id });
 
         try {
-            const hash = await queries.placeBid(user.privateKey, poolId, amount, parseInt(fee));
+            const reserveForGas = parseEther("0.00002");
+            const fallbackValue = parseEther("0.0000001");
+
+            const auction = await queries.getAuction(poolId);
+            const currentHighestBid = auction
+                ? (auction.highestBid ?? auction[4] ?? 0n)
+                : 0n;
+            const minOutbidValue = currentHighestBid + 1n;
+
+            const balance = await publicClient.getBalance({ address: user.wallet_address });
+            if (balance <= reserveForGas) {
+                throw new Error(`Insufficient ETH for gas. Balance: ${formatEther(balance)} ETH`);
+            }
+
+            let bidValue = parseEther(amount);
+            if (bidValue < minOutbidValue) {
+                bidValue = minOutbidValue;
+            }
+
+            if (balance < bidValue + reserveForGas) {
+                const maxAffordable = balance - reserveForGas;
+                if (maxAffordable <= currentHighestBid) {
+                    throw new Error(
+                        `Bid too low for current auction. Highest bid is ${formatEther(currentHighestBid)} ETH. ` +
+                        `Balance: ${formatEther(balance)} ETH`
+                    );
+                }
+
+                if (fallbackValue >= minOutbidValue && balance >= fallbackValue + reserveForGas) {
+                    bidValue = fallbackValue;
+                } else {
+                    bidValue = maxAffordable;
+                }
+
+                console.log(`⚠️ Adjusted bid for ${user.persona} to ${formatEther(bidValue)} ETH due to balance/auction constraints (${formatEther(balance)} ETH).`);
+            }
+
+            if (bidValue <= currentHighestBid) {
+                throw new Error(`Bid too low. Current highest bid is ${formatEther(currentHighestBid)} ETH`);
+            }
+
+            const bidAmount = formatEther(bidValue);
+            const hash = await queries.placeBid(user.privateKey, poolId, bidAmount, parseInt(fee));
             console.log(`✅ Bid Successful: ${hash}`);
             bot.editMessageText(`
 ✅ **Bid Submitted!**
@@ -352,7 +630,11 @@ Hash: \`${hash}\`
 🔗 [Explorer](https://sepolia.uniscan.xyz/tx/${hash})
             `, { chat_id: chatId, message_id: query.message.message_id, parse_mode: 'Markdown', disable_web_page_preview: true });
         } catch (e) {
-            bot.editMessageText(`❌ **Failed:** ${e.shortMessage || e.message}`, { chat_id: chatId, message_id: query.message.message_id });
+            const rawError = `${e?.shortMessage || ''} ${e?.message || ''}`;
+            const userError = rawError.includes('0xa0d26eb6')
+                ? 'Bid too low. Another bid is already higher. Tap Quick Bid again to auto-outbid.'
+                : (e.shortMessage || e.message);
+            bot.editMessageText(`❌ **Failed:** ${userError}`, { chat_id: chatId, message_id: query.message.message_id });
         }
     }
 });

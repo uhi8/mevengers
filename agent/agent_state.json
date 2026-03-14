@@ -1,0 +1,36 @@
+{
+  "swapHistory": [
+    {
+      "poolId": "0xf2f963df257b53719e52344fe06b325f93a7fa23533453feb8edca4a235c7205",
+      "amount": "100000000000",
+      "timestamp": 1773496393864,
+      "isMEV": false
+    },
+    {
+      "poolId": "0xd6f4e9d9101991cb5d9528201ea240702f26cb45f4ce6abb88a358099d4c26c2",
+      "amount": "100000000000",
+      "timestamp": 1773500265019,
+      "isMEV": false
+    },
+    {
+      "poolId": "0xb0ad25a0b3879e828ce20b3c057f60453b31a0e3562848a8e7e0d03c9e0b4c6b",
+      "amount": "100000000001",
+      "timestamp": 1773500735145,
+      "isMEV": false
+    }
+  ],
+  "guardians": [
+    {
+      "address": "0x7e63C0B7dFBb82bE01d9B7Bf01D33484655e7769",
+      "wins": 1,
+      "bids": 14,
+      "lastActive": 1773501589039
+    },
+    {
+      "address": "0x7b477632D02D113121CeC500100a0266840283EC",
+      "wins": 2,
+      "bids": 14,
+      "lastActive": 1773502209269
+    }
+  ]
+}

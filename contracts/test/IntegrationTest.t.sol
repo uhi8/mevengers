@@ -130,10 +130,20 @@ contract IntegrationTest is Test {
 
         assertEq(afterBalance - beforeBalance, expectedInsurance);
         assertEq(insuranceFund.fundBalance(poolId), expectedInsurance);
+        assertEq(address(hook).balance, 0);
 
         (bool locked, , , , , uint24 finalFee) = hook.auctions(poolId);
         assertFalse(locked);
         assertEq(finalFee, 500); // Winning fee preserved
+    }
+
+    function test_SettlementRevertsBeforeAuctionEnd() public {
+        vm.prank(sentinel);
+        hook.lockPool(poolId);
+
+        vm.expectRevert(MEVengersHook.AuctionStillActive.selector);
+        vm.prank(sentinel);
+        hook.settleAuctionAndUnlock(poolId, 3000);
     }
 
     function test_ReputationReward() public {

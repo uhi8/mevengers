@@ -9,8 +9,8 @@
         "relay": "node src/relayer.js"
     },
     "dependencies": {
-        "viem": "^2.17.0",
+        "dotenv": "^16.4.5",
         "node-telegram-bot-api": "^0.66.0",
-        "dotenv": "^16.4.5"
+        "viem": "^2.17.0"
     }
 }

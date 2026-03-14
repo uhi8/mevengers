@@ -14,12 +14,13 @@ import {
 import {MEVengersAgentRegistry} from "./MEVengersAgentRegistry.sol";
 import {MEVInsuranceFund} from "./MEVInsuranceFund.sol";
 import {Currency} from "@uniswap/v4-core/src/types/Currency.sol";
+import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 /// @title MEVengersHook
 /// @notice Uniswap V4 Hook for real-time MEV detection and autonomous auction management.
 /// @dev Deployed on Unichain. The MEVAuctionSentinel on Reactive Network exclusively controls
 ///      lockPool() and settleAuctionAndUnlock() to prevent race conditions and centralise authority.
-contract MEVengersHook is BaseHook {
+contract MEVengersHook is BaseHook, ReentrancyGuard {
     using PoolIdLibrary for PoolKey;
 
     // =========================================================
@@ -102,6 +103,7 @@ contract MEVengersHook is BaseHook {
 
     error OnlySentinelOrOwner();
     error AuctionNotActive();
+    error AuctionStillActive();
     error BidTooLow();
     error PoolNotLocked();
 
@@ -162,9 +164,10 @@ contract MEVengersHook is BaseHook {
     function settleAuctionAndUnlock(
         PoolId poolId,
         uint24 winningFeeBps
-    ) external onlySentinelOrOwner {
+    ) external onlySentinelOrOwner nonReentrant {
         AuctionState storage state = auctions[poolId];
         if (!state.locked) revert PoolNotLocked();
+        if (block.timestamp < state.auctionEnd) revert AuctionStillActive();
 
         address winner = state.highestBidder;
         uint256 pot = state.highestBid;
@@ -178,6 +181,12 @@ contract MEVengersHook is BaseHook {
 
         // 50% to the insurance fund. Winner keeps the remaining as a protection reward.
         uint256 insurance = (pot * INSURANCE_SPLIT) / 100;
+        uint256 winnerPayout = pot - insurance;
+
+        // Effects first
+        state.locked = false;
+        state.highestBidder = address(0);
+        state.highestBid = 0;
 
         if (insuranceFund != address(0) && insurance > 0) {
             // Transfer to the specific Insurance Fund contract
@@ -185,6 +194,11 @@ contract MEVengersHook is BaseHook {
                 abi.encodeWithSignature("deposit(bytes32)", poolId)
             );
             require(success, "Insurance deposit failed");
+        }
+
+        if (winner != address(0) && winnerPayout > 0) {
+            (bool paid, ) = winner.call{value: winnerPayout}("");
+            require(paid, "Winner payout failed");
         }
 
         // Boost winner's reputation (in-contract mapping)
@@ -209,11 +223,6 @@ contract MEVengersHook is BaseHook {
                 }
             }
         }
-
-        // Unlock the pool
-        state.locked = false;
-        state.highestBidder = address(0);
-        state.highestBid = 0;
 
         emit AuctionSettled(poolId, winner, finalFee, insurance);
         emit PoolUnlocked(poolId);
@@ -241,7 +250,7 @@ contract MEVengersHook is BaseHook {
     ///         The fee bid is the protection level they want to enforce on attacked swappers.
     /// @param poolId The pool being defended.
     /// @param feeBps The fee (in bps) the bidder wants to apply to the pool (e.g. 500 = 0.5%).
-    function placeBid(PoolId poolId, uint24 feeBps) external payable {
+    function placeBid(PoolId poolId, uint24 feeBps) external payable nonReentrant {
         AuctionState storage state = auctions[poolId];
         if (!state.locked) revert AuctionNotActive();
         if (block.timestamp > state.auctionEnd) revert AuctionNotActive();
@@ -250,15 +259,15 @@ contract MEVengersHook is BaseHook {
         address prevBidder = state.highestBidder;
         uint256 prevBid = state.highestBid;
 
+        state.highestBidder = msg.sender;
+        state.highestBid = msg.value;
+        state.winningFee = feeBps;
+
         // Refund the previous highest bidder
         if (prevBidder != address(0)) {
             (bool ok, ) = prevBidder.call{value: prevBid}("");
             require(ok, "Refund failed");
         }
-
-        state.highestBidder = msg.sender;
-        state.highestBid = msg.value;
-        state.winningFee = feeBps;
 
         emit BidPlaced(poolId, msg.sender, msg.value, feeBps);
     }
@@ -298,7 +307,7 @@ contract MEVengersHook is BaseHook {
 
     /// @notice Core MEV detection logic. Evaluates current swap for MEV signatures.
     function _beforeSwap(
-        address sender,
+        address,
         PoolKey calldata key,
         IPoolManager.SwapParams calldata params,
         bytes calldata

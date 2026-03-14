@@ -8,15 +8,11 @@ contract DeploySentinel is Script {
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("DEPLOYER_PRIVATE_KEY");
         address deployer = vm.addr(deployerPrivateKey);
+        address hook = vm.envAddress("MEV_HOOK_ADDRESS");
+        address registry = vm.envAddress("MEV_AGENT_REGISTRY_ADDRESS");
+        bool autoSubscribe = vm.envOr("REACTIVE_AUTO_SUBSCRIBE", false);
         
         vm.startBroadcast(deployerPrivateKey);
-
-        // CONFIGURATION (Using Aegis/Lasna standard)
-        address REACTIVE_SYSTEM_SERVICE = 0x0000000000000000000000000000000000fffFfF;
-        
-        // Load Unichain addresses from env or hardcode from previous step
-        address hook = 0x0cbdf9B816478ED6986B3082A8F1C279041240C0;
-        address registry = 0x170e2A44EA353bC11c6Ee7e28D80F802546022BA;
         address aiAgent = deployer; // Use deployer as the AI Agent identity for MVP
 
         MEVAuctionSentinel sentinel = new MEVAuctionSentinel(
@@ -28,8 +24,12 @@ contract DeploySentinel is Script {
         console.log("MEVAuctionSentinel deployed to:", address(sentinel));
 
         // Subscribe to MEVAlert events on Unichain
-        // sentinel.subscribeToMEVAlerts();
-        // console.log("Subscribed to MEVAlerts on Unichain.");
+        if (autoSubscribe) {
+            sentinel.subscribeToMEVAlerts();
+            console.log("Subscribed to MEVAlerts on Unichain.");
+        } else {
+            console.log("REACTIVE_AUTO_SUBSCRIBE=false; subscription skipped.");
+        }
 
         vm.stopBroadcast();
     }

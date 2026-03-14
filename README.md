@@ -28,6 +28,13 @@ Securely holds 50% of the winning auction premiums to compensate users targeted 
 ### 4. `bot/` (Telegram)
 A responsive Node.js bot interacting with Unichain via Viem to give retail users an easy interface into the high-stakes world of MEV defense.
 
+### 5. `agent/` (AI Sentinel)
+MVP off-chain intelligence service that now includes:
+- pending mempool monitoring for pre-emptive risk signals,
+- lightweight local state persistence (`agent_state.json`) for swap/reputation continuity,
+- active MEV score loop execution on observed activity,
+- ERC-8004 auto-registration bootstrap on startup.
+
 ## Setup and Development
 
 ### Prerequisites
@@ -42,5 +49,25 @@ forge build
 ```bash
 forge test
 ```
+
+### Runtime Integration (Bot + Fallback Relayer)
+To ensure the auction flow always completes (lock -> bid -> settle -> unlock), run both services in parallel:
+
+```bash
+cd bot && npm install
+npm run start
+```
+
+In a second terminal:
+
+```bash
+cd bot && npm run relay
+```
+
+The relayer now performs:
+- fallback `lockPool()` if Reactive callback lags,
+- fallback `settleAuctionAndUnlock()` after `auctionEnd` if settlement callback lags.
+
+It also performs startup recovery by scanning recent `PoolLocked` events and re-scheduling fallback settlement for still-locked pools.
 
 *(Further instructions on deploying to Unichain and Reactive Testnets coming soon)*

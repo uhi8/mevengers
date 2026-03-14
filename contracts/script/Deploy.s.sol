@@ -19,6 +19,7 @@ contract DeployMEVengers is Script {
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("DEPLOYER_PRIVATE_KEY");
         address deployer = vm.addr(deployerPrivateKey);
+        address sentinel = vm.envOr("MEV_SENTINEL_ADDRESS", address(0));
         
         vm.startBroadcast(deployerPrivateKey);
 
@@ -46,7 +47,18 @@ contract DeployMEVengers is Script {
         console.log("MEVengersHook deployed to:", address(hook));
 
         // 4. Wire everything together
+        hook.setInsuranceFund(address(insuranceFund));
         hook.setAgentRegistry(address(registry));
+        registry.setAuthorisedCaller(address(hook), true);
+
+        if (sentinel != address(0)) {
+            hook.setSentinel(sentinel);
+            registry.setAuthorisedCaller(sentinel, true);
+            console.log("Sentinel wired:", sentinel);
+        } else {
+            console.log("MEV_SENTINEL_ADDRESS not set; sentinel wiring skipped.");
+        }
+
         insuranceFund.setHook(address(hook));
         
         console.log("System wired up successfully.");

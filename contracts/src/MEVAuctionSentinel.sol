@@ -23,8 +23,8 @@ contract MEVAuctionSentinel is AbstractReactive {
     address public agentRegistry;       // MEVengersAgentRegistry on Unichain
     address public aiAgentAddress;      // The registered AI agent wallet address
 
-    uint256 public constant UNICHAIN_ID = 1301;     // Unichain Mainnet
-    uint256 public constant UNICHAIN_SEPOLIA_ID = 1301; // Unichain Sepolia testnet
+    uint256 public constant UNICHAIN_ID = 130;              // Unichain Mainnet
+    uint256 public constant UNICHAIN_SEPOLIA_ID = 1301;     // Unichain Sepolia testnet
 
     uint256 public constant AUCTION_DURATION = 180; // seconds — matches the Hook
 
@@ -81,7 +81,7 @@ contract MEVAuctionSentinel is AbstractReactive {
     function react(LogRecord calldata log) external override vmOnly {
         // --- Handle MEVAlert ---
         if (
-            log.chain_id == UNICHAIN_ID &&
+            log.chain_id == UNICHAIN_SEPOLIA_ID &&
             log.topic_0 == uint256(keccak256("MEVAlert(bytes32,uint256,address,uint256)"))
         ) {
             bytes32 poolId = bytes32(log.topic_1);
@@ -92,24 +92,12 @@ contract MEVAuctionSentinel is AbstractReactive {
                 "lockPool(bytes32)",
                 poolId
             );
-            emitCallback(UNICHAIN_ID, mevHook, 500_000, lockPayload);
+            emitCallback(UNICHAIN_SEPOLIA_ID, mevHook, 500_000, lockPayload);
 
             // STEP 2: ERC-8004 — Reward the AI Agent for the successful alert
             // The AI Agent has a registered identity in MEVengersAgentRegistry.
             // This records verifiable on-chain proof that the AI caught the MEV.
             if (agentRegistry != address(0) && aiAgentAddress != address(0)) {
-                bytes memory feedbackPayload = abi.encodeWithSignature(
-                    "giveFeedback(address,uint256,int128,uint8,string,string,string,string,bytes32)",
-                    aiAgentAddress,
-                    agentRegistry,
-                    int128(int256(mevScore)),   // score as the value
-                    0,
-                    "mev_block",                // tag1: what happened
-                    "pre_emptive_ai",           // tag2: who detected it
-                    "",
-                    "",
-                    bytes32(0)
-                );
                 // Call giveFeedback via the registry on Unichain
                 bytes memory registryPayload = abi.encodeWithSignature(
                     "giveFeedbackByAddress(address,int128,uint8,string,string,string,string,bytes32)",
@@ -122,7 +110,7 @@ contract MEVAuctionSentinel is AbstractReactive {
                     "",
                     bytes32(0)
                 );
-                emitCallback(UNICHAIN_ID, agentRegistry, 300_000, registryPayload);
+                emitCallback(UNICHAIN_SEPOLIA_ID, agentRegistry, 300_000, registryPayload);
             }
 
             // Track auction end on Reactive side
@@ -137,7 +125,7 @@ contract MEVAuctionSentinel is AbstractReactive {
         // Here we check if any tracked pools have expired auctions and settle them.
         // NOTE: In production, integrate with Reactive's native timer or subscribe to
         //       a periodic heartbeat contract to trigger this path.
-        if (log.chain_id == UNICHAIN_ID) {
+        if (log.chain_id == UNICHAIN_SEPOLIA_ID) {
             _checkAndSettleExpiredAuctions(log);
         }
     }
@@ -159,7 +147,7 @@ contract MEVAuctionSentinel is AbstractReactive {
                 poolId,
                 winningFee
             );
-            emitCallback(UNICHAIN_ID, mevHook, 500_000, settlePayload);
+            emitCallback(UNICHAIN_SEPOLIA_ID, mevHook, 500_000, settlePayload);
 
             // Clear tracking
             auctionEnds[poolId] = 0;
