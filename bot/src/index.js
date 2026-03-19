@@ -103,6 +103,13 @@ const HOOK_ABI = [
         ],
         outputs: [],
         stateMutability: 'nonpayable'
+    },
+    {
+        type: 'function',
+        name: 'lockPool',
+        inputs: [{ name: 'poolId', type: 'bytes32' }],
+        outputs: [],
+        stateMutability: 'nonpayable'
     }
 ];
 
@@ -829,16 +836,15 @@ setInterval(() => console.log("💓 Heartbeat..."), 60000);
 app.post("/trigger-attack", async (req, res) => {
     console.log("⚡ HTTP Trigger: Initiating MEV Attack...");
     try {
+        // Use the pool ID from the request or a default one for simulation
+        const poolId = req.body.poolId || "0x0000000000000000000000000000000000000000000000000000000000000001";
         const hash = await settlementClient.writeContract({
             address: MEV_HOOK_ADDRESS,
             abi: HOOK_ABI,
             functionName: "lockPool",
-            args: [parseEther("1")] // Trigger with 1 ETH vol simulation
+            args: [poolId]
         });
 
-        // Broadcast to all known chats if needed, but for now just return success
-        // In a real hackathon demo, we'd trigger a broadcast here.
-        
         res.json({ success: true, hash, txUrl: `https://sepolia.uniscan.xyz/tx/${hash}` });
     } catch (e) {
         console.error("❌ HTTP Trigger Error:", e);
