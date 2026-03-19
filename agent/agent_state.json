@@ -17,20 +17,32 @@
       "amount": "100000000001",
       "timestamp": 1773500735145,
       "isMEV": false
+    },
+    {
+      "poolId": "0xc2847b424883a36000d5f5e480c3dc957dd3109710a1fa61b862e8b07aacf289",
+      "amount": "100000000000",
+      "timestamp": 1773880607286,
+      "isMEV": false
+    },
+    {
+      "poolId": "pending_pool_manager",
+      "amount": "1",
+      "timestamp": 1773884681054,
+      "isMEV": false
     }
   ],
   "guardians": [
     {
       "address": "0x7e63C0B7dFBb82bE01d9B7Bf01D33484655e7769",
-      "wins": 1,
-      "bids": 14,
-      "lastActive": 1773501589039
+      "wins": 3,
+      "bids": 17,
+      "lastActive": 1773884686998
     },
     {
       "address": "0x7b477632D02D113121CeC500100a0266840283EC",
-      "wins": 2,
-      "bids": 14,
-      "lastActive": 1773502209269
+      "wins": 4,
+      "bids": 16,
+      "lastActive": 1773880227750
     }
   ]
 }

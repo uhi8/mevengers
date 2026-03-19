@@ -9,6 +9,7 @@ const { createPublicClient, createWalletClient, http, parseEther, formatEther, i
 const { privateKeyToAccount } = require("viem/accounts");
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
 // ─── Configuration ──────────────────────────────────────────────────
@@ -211,13 +212,13 @@ class BlockchainMonitor {
         }
 
         this.broadcastToUsers(`
-🚨 **MEV ALERT DETECTED!**
+🚨 **SUSPICIOUS ACTIVITY DETECTED!**
 
 Pool: \`${poolId}\`
-On-chain Score: **${mevScore}/100**${aiInsight}
-Status: 🔒 Reactive Sentinel locking pool...
+On-chain Risk Score: **${mevScore}/100**${aiInsight}
+Status: 🛡️ **Autonomous Sentinel** is intervening to protect users...
 
-⚡ *Guardian Action:* Bid now to earn rewards!
+⚡ *Guardian Action:* Stand by for the protective auction!
         `, shortId);
     }
 
@@ -226,12 +227,14 @@ Status: 🔒 Reactive Sentinel locking pool...
         const shortId = this.getShortId(poolId);
         console.log(`🔒 Pool Locked: ${poolId}`);
         this.broadcastToUsers(`
-🔒 **POOL LOCKED BY SENTINEL!**
+🔒 **POOL SECURED BY SENTINEL!**
 
 Pool: \`${poolId}\`
-Status: 🛡️ Auction is LIVE.
+Status: 🛡️ **Protective Auction is LIVE.**
 
-⚡ *Guardian Action:* Place your protective bid now!
+The pool has been frozen to prevent extraction. Guardians, place your bids now to establish the new safe fee and earn rewards!
+
+⚡ *Guardian Action:* Tap below to secure the pool!
         `, shortId);
 
     this.scheduleFallbackSettlement(poolId, auctionEnd);
@@ -254,23 +257,25 @@ Status: 🛡️ Auction is LIVE.
 
             if (isWinner) {
                 this.bot.sendMessage(user.telegram_id, `
-🏆 **AUCTION SETTLED: YOU WON!**
+🏆 **VICTORY: YOU ARE THE GUARDIAN!**
 
 You successfully defended Pool \`${poolId.substring(0, 10)}...\`!
-💰 Insurance distributed: ${formatEther(insurancePaid)} ETH
-⭐ Reputation gained: +10
+💰 **Insurance distributed:** ${formatEther(insurancePaid)} ETH
+⭐ **Reputation gained:** +10
+
+Your protective fee is now active on-chain.
                 `, { parse_mode: 'Markdown' });
                 return;
             }
 
             this.bot.sendMessage(user.telegram_id, `
-✅ **AUCTION SETTLED**
+✅ **POOL DEFENDED**
 
 Pool: \`${poolId.substring(0, 10)}...\`
-Winner: ${winnerLabel}
+Guardian: ${winnerLabel}
 Insurance distributed: ${formatEther(insurancePaid)} ETH
 
-Better luck next round ⚡
+The threat has been neutralized. Better luck next round, Guardian! ⚡
             `, { parse_mode: 'Markdown' });
         });
     }
@@ -282,7 +287,7 @@ Better luck next round ⚡
             const opts = { parse_mode: 'Markdown' };
             if (shortId) {
                 opts.reply_markup = {
-                    inline_keyboard: [[{ text: "🎯 Quick Bid (0.0000001 ETH, 0.3% fee)", callback_data: `confirm_bid_${shortId}_0.0000001_3000` }]]
+                    inline_keyboard: [[{ text: "⚡ Become a Guardian (0.3% fee)", callback_data: `confirm_bid_${shortId}_0.0000001_3000` }]]
                 };
             }
             this.bot.sendMessage(u.telegram_id, text, opts);
@@ -433,17 +438,31 @@ const queries = new ContractQueries(publicClient, MEV_HOOK_ADDRESS);
 
 bot.onText(/\/start/, (msg) => {
     bot.sendMessage(msg.chat.id, `
-🛡️ **MEVengers Bot** (ethdelhi architecture)
+🛡️ **Welcome to MEVengers**
 
-I monitor Uniswap V4 pools for MEV and help you defend them!
+I am your portal to the world's first autonomous MEV protection network. I monitor Uniswap V4 pools for malicious extraction and empower **YOU** to become a Guardian of the Unichain.
 
-📱 **Commands:**
-/connect - Connect your Guardian persona
-/balance - Check your persona's balance
-/status [poolId|shortId] - Check auction status
-/help - Show this message
+📱 **How it works:**
+1. Connect your wallet persona.
+2. Receive alerts when a pool is under attack.
+3. Bid in the "Protective Auction" to establish safe fees.
+4. Earn rewards and build your reputation as a Defender.
 
 🚀 **Get started:** /connect
+    `, { parse_mode: 'Markdown' });
+});
+
+bot.onText(/\/help/, (msg) => {
+    bot.sendMessage(msg.chat.id, `
+📘 **Guardian Commands**
+
+/connect - Link your wallet to a Guardian persona
+/balance - Check your current ETH reserves
+/status - View details of the active auction
+/trigger - Start a real on-chain demo (Unichain Sepolia)
+/simulate - Test the interface with a simulated event
+
+*For testing: Run /connect then /simulate to see the Guardian workflow.*
     `, { parse_mode: 'Markdown' });
 });
 
@@ -558,6 +577,89 @@ Timestamps:
     }
 });
 
+bot.onText(/\/simulate/, async (msg) => {
+    const chatId = msg.chat.id;
+    const user = loadDB().users[msg.from.id.toString()];
+
+    if (!user) {
+        return bot.sendMessage(chatId, "❌ Run /connect first, then /simulate.");
+    }
+
+    const pseudoPoolId = `0x${Date.now().toString(16).padStart(64, '0')}`;
+    const shortId = monitor.getShortId(pseudoPoolId);
+
+    return bot.sendMessage(chatId, `
+🧪 **SIMULATION: MEV ATTACK IN PROGRESS**
+
+Pool: \`${pseudoPoolId}\`
+Status: 🔒 **Defensive measures initialized.**
+
+This is a simulation of a live MEV attack. The pool has been locked. As a Guardian, you can now bid to set the protective fee.
+
+⚡ *Action:* Tap a button below to simulate your bid!
+    `, {
+        parse_mode: 'Markdown',
+        reply_markup: {
+            inline_keyboard: [
+                [
+                    { text: "📊 Demo Status", callback_data: "frontend_demo_status" },
+                    { text: "⚡ Demo Bid 0.30%", callback_data: "frontend_demo_bid_3000" }
+                ],
+                [
+                    { text: "⚡ Demo Bid 0.20%", callback_data: "frontend_demo_bid_2000" },
+                    { text: "⚡ Demo Bid 0.10%", callback_data: "frontend_demo_bid_1000" }
+                ]
+            ]
+        }
+    });
+});
+
+bot.onText(/\/trigger/, async (msg) => {
+    const chatId = msg.chat.id;
+    const user = loadDB().users[msg.from.id.toString()];
+
+    if (!user) {
+        return bot.sendMessage(chatId, "❌ Run /connect first, then /trigger.");
+    }
+
+    if (!settlementClient) {
+        return bot.sendMessage(chatId, "❌ Deployer wallet unavailable. Set DEPLOYER_PRIVATE_KEY.");
+    }
+
+    const poolId = `0x${crypto.randomBytes(32).toString('hex')}`;
+
+    try {
+        const hash = await settlementClient.writeContract({
+            address: MEV_HOOK_ADDRESS,
+            abi: [{
+                type: 'function',
+                name: 'lockPool',
+                inputs: [{ name: 'poolId', type: 'bytes32' }],
+                outputs: [],
+                stateMutability: 'nonpayable'
+            }],
+            functionName: 'lockPool',
+            args: [poolId]
+        });
+
+        const shortId = monitor.getShortId(poolId);
+        bot.sendMessage(chatId, `
+🚀 **Real Auction Triggered**
+
+Pool: \`${poolId}\`
+Short ID: \`${shortId}\`
+Tx: [${hash}](https://sepolia.uniscan.xyz/tx/${hash})
+
+Now wait a few seconds for lock event broadcast, then tap the single Quick Bid button from the lock alert.
+        `, {
+            parse_mode: 'Markdown',
+            disable_web_page_preview: true
+        });
+    } catch (e) {
+        bot.sendMessage(chatId, `❌ Trigger failed: ${e.shortMessage || e.message}`);
+    }
+});
+
 bot.on('callback_query', async (query) => {
     const chatId = query.message.chat.id;
     const telegramId = query.from.id.toString();
@@ -566,6 +668,44 @@ bot.on('callback_query', async (query) => {
     const user = db.users[telegramId];
 
     console.log(`🔹 Button Click: ${data} from ${user ? user.persona : 'Unknown'}`);
+
+    if (data === 'frontend_demo_status') {
+        await bot.answerCallbackQuery(query.id, { text: 'Demo status updated ✅' });
+        return bot.editMessageText(`
+🧪 **SIMULATION STATUS**
+
+Phase: **AUCTION LIVE**
+Current Guardian Bid: 0.0000001 ETH
+Proposed Protective Fee: **0.30%**
+
+In a real scenario, you would use \`/status\` to track live on-chain activity.
+        `, {
+            chat_id: chatId,
+            message_id: query.message.message_id,
+            parse_mode: 'Markdown',
+            reply_markup: {
+                inline_keyboard: [[{ text: "⚡ Lower Fee to 0.20%", callback_data: "frontend_demo_bid_2000" }]]
+            }
+        });
+    }
+
+    if (data.startsWith('frontend_demo_bid_')) {
+        const fee = Number(data.split('_').pop() || '3000');
+        await bot.answerCallbackQuery(query.id, { text: 'Demo bid accepted ✅' });
+        return bot.editMessageText(`
+✅ **Demo Bid Accepted**
+
+Persona: *${user ? user.persona : 'Unknown'}*
+Bid: 0.0000001 ETH
+Fee: ${(fee / 100).toFixed(2)}%
+
+This is a Telegram demo flow. Real bids happen during live on-chain MEV auctions.
+        `, {
+            chat_id: chatId,
+            message_id: query.message.message_id,
+            parse_mode: 'Markdown'
+        });
+    }
 
     if (data.startsWith("confirm_bid_")) {
         if (!user) return bot.answerCallbackQuery(query.id, { text: "❌ Run /connect first!", show_alert: true });
@@ -576,7 +716,7 @@ bot.on('callback_query', async (query) => {
         if (!poolId) return bot.editMessageText("❌ Auction session expired.", { chat_id: chatId, message_id: query.message.message_id });
 
         console.log(`⏳ Submitting bid for ${user.persona} on pool ${poolId} (Fee: ${fee / 100}%)...`);
-        bot.editMessageText(`⏳ **Submitting bid for ${user.persona}...**`, { chat_id: chatId, message_id: query.message.message_id });
+        bot.editMessageText(`⏳ **Broadcasting your Guardian bid...**`, { chat_id: chatId, message_id: query.message.message_id });
 
         try {
             const reserveForGas = parseEther("0.00002");
@@ -624,16 +764,47 @@ bot.on('callback_query', async (query) => {
             const hash = await queries.placeBid(user.privateKey, poolId, bidAmount, parseInt(fee));
             console.log(`✅ Bid Successful: ${hash}`);
             bot.editMessageText(`
-✅ **Bid Submitted!**
-Persona: *${user.persona}*
-Hash: \`${hash}\`
-🔗 [Explorer](https://sepolia.uniscan.xyz/tx/${hash})
+✅ **BID SECURED!**
+
+Your protective bid of **${bidAmount} ETH** has been sent to Unichain. If you win, you will establish the protective fee for this pool.
+
+🔗 [View on Explorer](https://sepolia.uniscan.xyz/tx/${hash})
             `, { chat_id: chatId, message_id: query.message.message_id, parse_mode: 'Markdown', disable_web_page_preview: true });
         } catch (e) {
             const rawError = `${e?.shortMessage || ''} ${e?.message || ''}`;
-            const userError = rawError.includes('0xa0d26eb6')
-                ? 'Bid too low. Another bid is already higher. Tap Quick Bid again to auto-outbid.'
-                : (e.shortMessage || e.message);
+            if (rawError.includes('0xa0d26eb6')) {
+                try {
+                    const latestAuction = await queries.getAuction(poolId);
+                    const latestHighest = latestAuction ? (latestAuction.highestBid ?? latestAuction[4] ?? 0n) : 0n;
+                    const retryBidValue = latestHighest + 1n;
+                    const balance = await publicClient.getBalance({ address: user.wallet_address });
+                    const reserveForGas = parseEther("0.00002");
+
+                    if (balance <= retryBidValue + reserveForGas) {
+                        throw new Error(`Auto-outbid skipped: insufficient balance (${formatEther(balance)} ETH)`);
+                    }
+
+                    const retryHash = await queries.placeBid(
+                        user.privateKey,
+                        poolId,
+                        formatEther(retryBidValue),
+                        parseInt(fee)
+                    );
+
+                    return bot.editMessageText(`
+✅ **Bid Submitted (Auto-Outbid)!**
+Persona: *${user.persona}*
+Bid: ${formatEther(retryBidValue)} ETH
+Hash: \`${retryHash}\`
+🔗 [Explorer](https://sepolia.uniscan.xyz/tx/${retryHash})
+                    `, { chat_id: chatId, message_id: query.message.message_id, parse_mode: 'Markdown', disable_web_page_preview: true });
+                } catch (retryErr) {
+                    const retryMsg = retryErr.shortMessage || retryErr.message || 'auto-outbid failed';
+                    return bot.editMessageText(`❌ **Failed:** Bid race detected and auto-outbid failed (${retryMsg}).`, { chat_id: chatId, message_id: query.message.message_id });
+                }
+            }
+
+            const userError = e.shortMessage || e.message;
             bot.editMessageText(`❌ **Failed:** ${userError}`, { chat_id: chatId, message_id: query.message.message_id });
         }
     }
