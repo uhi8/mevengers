@@ -6,9 +6,10 @@
 ---
 
 ## 🔗 Live Deployments (Judge Hub)
-- **Interactive Pitch & Demo**: [mevengers.vercel.app/presentation.html](https://mevengers-presentation.vercel.app/presentation.html) *(Coming Soon / Example)*
+- **Official Frontend & Demo**: [mevengers.vercel.app](https://mevengers.vercel.app) 🌐
+- **Interactive Pitch & Deck**: [mevengers.vercel.app/presentation.html](https://mevengers.vercel.app/presentation.html) 📊
 - **Telegram Guardian Bot**: [@MEVengers_Protection_bot](https://t.me/MEVengers_Protection_bot) 🛡️
-- **AI Sentinel Hub**: [tender-imagination-production-982a.up.railway.app](https://tender-imagination-production-982a.up.railway.app)
+- **AI Sentinel Hub**: [mevengers-production.up.railway.app](https://mevengers-production.up.railway.app)
 - **Unichain Sepolia Hook**: `0x756751bE0FD74cdbB7af4410ca3aB4C02372c0c0`
 
 ---
@@ -146,10 +147,10 @@ npm run start
 ---
 
 ## 🎮 Usage & Demo
-1. **Connect**: Launch the Telegram Bot and run `/connect` to assign yoursell a Guardian persona.
-2. **Trigger**: Run `node bot/src/trigger_mev.js` or `node bot/src/demo_ping.js` to simulate a real MEV attack.
-3. **Defend**: You will receive a Telegram alert. Tap **"⚡ Become a Guardian"** to place a bid.
-4. **Settle**: Watch as the Reactive Sentinel (or fallback relayer) settles the auction and returns rewards to your wallet!
+1. **Connect**: Launch the **Telegram Bot** and run `/start`. (This registers your session for alerts).
+2. **Trigger**: Head to the **[Live Dashboard](https://mevengers.vercel.app)** and click the **"Trigger MEV Attack (Demo)"** button. 
+3. **Defend**: You will receive an **Instant Telegram Alert**. Tap **"⚡ Become a Guardian"** to place a real on-chain bid.
+4. **Settle**: Watch as the **Reactive Sentinel** (or fallback relayer) autonomously settles the auction on Unichain and distributes insurance rewards to your wallet!
 
 ---
 
