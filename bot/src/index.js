@@ -314,7 +314,7 @@ The threat has been neutralized. Better luck next round, Guardian! ⚡
                     inline_keyboard: [[{ text: "⚡ Become a Guardian (0.3% fee)", callback_data: `confirm_bid_${shortId}_0.0000001_3000` }]]
                 };
             }
-            this.bot.sendMessage(u.telegram_id, text, opts);
+            this.bot.sendMessage(chatId, text, opts);
         });
     }
 
