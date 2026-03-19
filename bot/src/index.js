@@ -22,6 +22,11 @@ app.use(express.json());
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const MEV_HOOK_ADDRESS = process.env.MEV_HOOK_ADDRESS;
 const UNICHAIN_RPC = process.env.UNICHAIN_SEPOLIA_RPC_URL || "https://sepolia.unichain.org";
+const MASTER_CHAT_ID = process.env.MASTER_CHAT_ID;
+
+// Use memory set as a fallback for Railway ephemeral disk
+const memoryUsers = new Set();
+if (MASTER_CHAT_ID) memoryUsers.add(MASTER_CHAT_ID);
 
 const UNICHAIN = {
     id: 1301,
@@ -295,14 +300,14 @@ The threat has been neutralized. Better luck next round, Guardian! ⚡
 
     broadcastToUsers(text, shortId) {
         const data = loadDB();
-        // For the demo, ensure we broadcast to EVERYONE in our database so the judge never misses it
-        const users = Object.values(data.users);
-        if (users.length === 0) {
-            console.log("ℹ️ Broadcast skipped: No users found in database.");
-            return;
-        }
         
-        users.forEach(u => {
+        // Merge DB users with session-memory users to overcome ephemeral disk on Railway
+        const dbUsers = Object.values(data.users).map(u => u.telegram_id);
+        const allTargetChatIds = new Set([...dbUsers, ...Array.from(memoryUsers)]);
+        
+        console.log(`📡 Broadcasting to ${allTargetChatIds.size} users (DB: ${dbUsers.length}, Session: ${memoryUsers.size})`);
+        
+        allTargetChatIds.forEach(chatId => {
             const opts = { parse_mode: 'Markdown' };
             if (shortId) {
                 opts.reply_markup = {
@@ -450,6 +455,13 @@ bot.on('polling_error', (err) => {
         process.exit(1);
     }
     console.error('❌ Telegram polling error:', msg);
+});
+
+bot.on('message', (msg) => {
+    if (msg.chat && msg.chat.id) {
+        memoryUsers.add(msg.chat.id.toString());
+        console.log(`👤 Captured Chat ID in session: ${msg.chat.id} (${memoryUsers.size} active)`);
+    }
 });
 
 const monitor = new BlockchainMonitor(publicClient, MEV_HOOK_ADDRESS, bot, settlementClient);
