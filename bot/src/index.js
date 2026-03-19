@@ -850,28 +850,19 @@ monitor.startMonitoring();
 console.log("🤖 MEVengers Bot is running...");
 setInterval(() => console.log("💓 Heartbeat..."), 60000);
 
-// ─── HTTP API for Frontend Trigger ──────────────────────────────────
-app.get("/health", (req, res) => {
-    res.json({ status: "ok", monitor: "active", users_in_memory: memoryUsers.size });
-});
-
 app.post("/trigger-attack", async (req, res) => {
-    console.log("⚡ HTTP Trigger: Initiating MEV Attack...");
-    const poolId = req.body.poolId || "0x0000000000000000000000000000000000000000000000000000000000000001";
-    const shortId = monitor.getShortId(poolId);
-
-    // INSTANT BROADCAST for Demo speed
-    monitor.broadcastToUsers(`
-🚨 **DEMO: MEV ATTACK INITIATED**
-
-Pool: \`${poolId}\`
-Status: ⚔️ **Predatory Transaction Detected.**
-MEV Score: **98/100**
-
-🛡️ Sentinel is locking the pool and starting the protective auction. Stand by for the live Guardian alert...
-    `, shortId);
-
     try {
+        console.log("⚡ HTTP Trigger: Initiating Real MEV Attack...");
+        
+        if (!settlementClient) {
+            return res.status(500).json({ success: false, error: "Deployer wallet unavailable. Set DEPLOYER_PRIVATE_KEY on Railway." });
+        }
+
+        // 1. Generate a random poolId just like the /trigger command
+        const poolId = `0x${crypto.randomBytes(32).toString('hex')}`;
+        const shortId = monitor.getShortId(poolId);
+
+        // 2. Perform the on-chain lock transaction
         const hash = await settlementClient.writeContract({
             address: MEV_HOOK_ADDRESS,
             abi: HOOK_ABI,
@@ -879,12 +870,28 @@ MEV Score: **98/100**
             args: [poolId]
         });
 
+        // 3. Broadcast the exact same message as the /trigger command
+        monitor.broadcastToUsers(`
+🚀 **Real Auction Triggered (via Website)**
+
+Pool: \`${poolId}\`
+Short ID: \`${shortId}\`
+Tx: [${hash}](https://sepolia.uniscan.xyz/tx/${hash})
+
+Now wait a few seconds for lock event broadcast, then tap the single Quick Bid button from the lock alert.
+        `, shortId);
+
         res.json({ success: true, hash, txUrl: `https://sepolia.uniscan.xyz/tx/${hash}` });
     } catch (e) {
-        console.error("❌ HTTP Trigger On-Chain Error:", e);
-        // Still return success if broadcast worked, but mention the chain error
-        res.json({ success: true, note: "Broadcast sent, but on-chain lock failed (expected if pool already locked)", error: e.message });
+        console.error("❌ HTTP Trigger Error:", e);
+        res.status(500).json({ success: false, error: e.message });
     }
+});
+
+// Final fallback error handler for Express
+app.use((err, req, res, next) => {
+    console.error("🔥 GLOBAL EXPRESS ERROR:", err);
+    res.status(500).json({ success: false, error: "Internal Server Error in Sentinel API" });
 });
 
 const PORT = process.env.PORT || 3001;
