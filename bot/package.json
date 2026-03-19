@@ -6,6 +6,7 @@
     "scripts": {
         "start": "node src/index.js",
         "dev": "node --watch src/index.js",
+        "build": "echo 'No build required for Node.js bot — Ready to start!'",
         "relay": "node src/relayer.js"
     },
     "dependencies": {

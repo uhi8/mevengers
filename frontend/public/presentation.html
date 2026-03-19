@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEVengers - Master Demo Presentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* --- 1. THE SETUP & BASE STYLES --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #050505; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Inter', sans-serif; color: #c9d1d9; overflow: hidden; }
+        .slide-container { display: none; flex-direction: column; align-items: flex-start; background-color: #080c14; background-image: radial-gradient(circle at 0% 0%, rgba(0, 255, 102, 0.08), transparent 40%), radial-gradient(circle at 100% 100%, rgba(0, 122, 255, 0.08), transparent 40%); border: 1px solid #1a2235; border-radius: 12px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8); height: 720px; width: 1280px; padding: 60px; position: relative; animation: fadeIn 0.4s ease-in-out; }
+        .slide-container.active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .slide-container::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #00ff66, #007aff, #ff007a); opacity: 0.7; }
+        /* --- 2. TYPOGRAPHY --- */
+        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; color: #ffffff; font-weight: 700; }
+        .slide-title { font-size: 48px; margin-bottom: 10px; width: 100%; text-align: center; letter-spacing: -1px; position: relative; z-index: 2; }
+        p { font-size: 18px; line-height: 1.6; margin-bottom: 15px; }
+        .highlight-pink { color: #ff007a; } .highlight-green { color: #00ff66; } .highlight-blue { color: #007aff; } .highlight-red { color: #ff3b30; } 
+        .slide-description { font-size: 20px; color: #9ca3af; width: 100%; text-align: center; margin-bottom: 30px; }
+
+        /* --- 3. HERO SLIDE 1 --- */
+        .hero-epic { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; width: 100%; height: 100%; }
+        .hero-epic i { font-size: 90px; color: #00ff66; margin-bottom: 25px; animation: pulse 2.5s infinite; }
+        .hero-epic h1 { font-size: 96px; line-height: 1.1; margin-bottom: 10px; letter-spacing: -3px; }
+        .hero-epic .subtitle { font-size: 38px; font-family: 'Space Grotesk', sans-serif; color: #007aff; margin-bottom: 50px; letter-spacing: 3px; font-weight: 600; text-transform: uppercase; }
+        .hero-epic p { font-size: 24px; color: #d1d5db; max-width: 800px; margin-bottom: 15px; }
+        @keyframes pulse { 0% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(0,255,102,0.4)); } 50% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(0,255,102,0.8)); } 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(0,255,102,0.4)); } }
+        
+        /* --- 4. TREE DIAGRAMS --- */
+        .tree { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; margin-top: 10px; z-index: 2;}
+        .t-root { background: #111827; border: 2px solid #ff3b30; border-radius: 16px; padding: 20px 40px; text-align: center; box-shadow: 0 10px 25px rgba(255,59,48,0.2); width: 450px; }
+        .t-root h3 { color: #ff3b30; font-size: 26px; margin-bottom: 5px; }
+        .t-root p { color: #d1d5db; margin: 0; }
+        .t-stem { width: 2px; height: 30px; background: #ff3b30; }
+        .t-bar-container { width: 780px; position: relative; height: 30px; }
+        .t-bar { width: 100%; height: 2px; background: #ff3b30; position: absolute; top: 0; left: 0; }
+        .t-drop-left, .t-drop-mid, .t-drop-right { width: 2px; height: 30px; background: #ff3b30; position: absolute; top: 0; }
+        .t-drop-left { left: 0; }
+        .t-drop-mid { left: 50%; transform: translateX(-50%); }
+        .t-drop-right { right: 0; }
+        /* Arrows matching background */
+        .t-drop-left::after, .t-drop-mid::after, .t-drop-right::after { content: '▼'; position: absolute; bottom: -8px; left: -5px; color: #ff3b30; font-size: 14px; background: #080c14; padding: 0 2px;}
+        .t-branches { display: flex; justify-content: space-between; width: 840px; } 
+        .t-branch { background: #111827; border: 2px solid #007aff; border-radius: 16px; padding: 25px 20px; text-align: center; width: 260px; display: flex; flex-direction: column; align-items: center; }
+        .t-branch i { font-size: 32px; color: #007aff; margin-bottom: 15px; }
+        .t-branch h4 { color: #fff; font-size: 20px; margin-bottom: 10px; border-bottom: 1px solid rgba(0,122,255,0.3); padding-bottom: 8px; width: 100%;}
+        .t-branch p { color: #9ca3af; font-size: 15px; margin: 0; line-height: 1.5; }
+
+        /* GREEN THEME FOR SOLUTION TREE */
+        .t-root.green { border-color: #00ff66; box-shadow: 0 10px 25px rgba(0,255,102,0.15); }
+        .t-root.green h3 { color: #00ff66; }
+        .t-stem.green, .t-bar.green, .t-drop-left.green, .t-drop-mid.green, .t-drop-right.green { background: #00ff66; }
+        .t-drop-left.green::after, .t-drop-mid.green::after, .t-drop-right.green::after { color: #00ff66; }
+        .t-branch.green-box { border-color: #00ff66; }
+        .t-branch.green-box i { color: #00ff66; }
+        .t-branch.green-box h4 { border-bottom-color: rgba(0,255,102,0.3); }
+        .t-branch.pink-box { border-color: #ff007a; }
+        .t-branch.pink-box i { color: #ff007a; }
+        .t-branch.pink-box h4 { border-bottom-color: rgba(255,0,122,0.3); }
+
+        /* --- 5. ADVANCED ARCHITECTURE DIAGRAM (Slide 4) --- */
+        .arch-container { position: relative; width: 1160px; height: 450px; margin: 0 auto; margin-top: 50px; }
+        .arch-node { position: absolute; transform: translate(-50%, -50%); background: rgba(17, 24, 39, 0.85); backdrop-filter: blur(10px); border: 1px solid; border-radius: 16px; padding: 20px; width: 240px; text-align: center; z-index: 10; box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+        .arch-node.human { top: 150px; left: 150px; border-color: rgba(255, 255, 255, 0.3); box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); }
+        .arch-node.hook { top: 150px; left: 580px; border-color: #00ff66; box-shadow: 0 0 30px rgba(0, 255, 102, 0.2); background: rgba(0, 255, 102, 0.05); }
+        .arch-node.sentinel { top: 150px; left: 1010px; border-color: #007aff; box-shadow: 0 0 30px rgba(0, 122, 255, 0.2); }
+        .arch-node.agent { top: 380px; left: 580px; border-color: #ff007a; box-shadow: 0 0 30px rgba(255, 0, 122, 0.2); background: rgba(255, 0, 122, 0.05); }
+        .arch-node .node-icon { font-size: 36px; margin-bottom: 12px; }
+        .arch-node h4 { font-size: 18px; margin-bottom: 5px; letter-spacing: -0.5px; }
+        .arch-node p { font-size: 13px; margin: 0; color: #9ca3af; }
+        .arch-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .flow-line { fill: none; stroke-width: 3; stroke-dasharray: 8 8; animation: flowAnim 1.5s linear infinite; }
+        .flow-line.solid { stroke-dasharray: none; animation: none; opacity: 0.3; }
+        @keyframes flowAnim { to { stroke-dashoffset: -16; } }
+        .arch-label { position: absolute; background: #111827; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; z-index: 5; transform: translate(-50%, -50%); border: 1px solid; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        
+        /* --- 6. OTHER COMPONENTS --- */
+        .comparison-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #111827; border-radius: 16px; overflow: hidden; border: 1px solid #1f2937; }
+        .comparison-table th, .comparison-table td { padding: 20px 30px; text-align: left; border-bottom: 1px solid #1f2937; }
+        .comparison-table th { font-family: 'Space Grotesk', sans-serif; font-size: 20px; color: #ffffff; background: #0f1420; }
+        .comparison-table td { font-size: 18px; color: #d1d5db; }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .vs-column { text-align: center !important; font-weight: bold; color: #4b5563; width: 100px; background: rgba(0,0,0,0.2); }
+        .full-bg-image { background-size: cover; background-position: center; }
+        .full-bg-image .content-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(8, 12, 20, 0.85); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px; }
+        .action-callout { background: linear-gradient(90deg, rgba(0, 255, 102, 0.1), transparent); border-left: 4px solid #00ff66; padding: 20px 30px; border-radius: 0 12px 12px 0; margin-top: 30px; }
+        .presentation-controls { position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.5); padding: 10px 20px; border-radius: 30px; display: flex; gap: 20px; opacity: 0.2; transition: opacity 0.3s; z-index: 100; }
+        .presentation-controls:hover { opacity: 1; }
+        .control-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+        .slide-counter { color: #9ca3af; font-family: 'Space Grotesk', sans-serif; font-size: 18px; display: flex; align-items: center; }
+        
+        /* --- 7. EXTERNAL LINKS --- */
+        .top-left-nav { position: fixed; top: 30px; left: 30px; display: flex; gap: 15px; z-index: 100; opacity: 0.7; transition: opacity 0.3s; }
+        .top-left-nav:hover { opacity: 1; }
+        .nav-btn { background: rgba(17, 24, 39, 0.9); border: 1px solid #1f2937; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 16px; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(5px); transition: all 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .nav-btn:hover { background: rgba(0, 255, 102, 0.2); border-color: #00ff66; transform: translateY(-2px); color: #00ff66; }
+    </style>
+</head>
+<body>
+
+<!-- Top Left Navigation -->
+<div class="top-left-nav">
+    <a href="https://github.com/uhi8/mevengers" target="_blank" class="nav-btn">
+        <i class="fa-brands fa-github"></i> GitHub
+    </a>
+    <a href="https://github.com/uhi8/mevengers/blob/main/README.md" target="_blank" class="nav-btn">
+        <i class="fa-solid fa-book"></i> Docs
+    </a>
+</div>
+
+<!-- Presentation Controls -->
+<div class="presentation-controls">
+    <button class="control-btn" onclick="prevSlide()" title="Previous Slide (Left Arrow)"><i class="fa-solid fa-chevron-left"></i></button>
+    <span class="slide-counter"><span id="current-slide">1</span> / 7</span>
+    <button class="control-btn" onclick="nextSlide()" title="Next Slide (Right Arrow)"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+
+<!-- Slide 1: Welcome to MEVengers -->
+<div class="slide-container active" id="slide1">
+    <div class="hero-epic">
+        <i class="fa-solid fa-shield-halved"></i>
+        <h1>MEVengers</h1>
+        <div class="subtitle">Autonomous MEV Defense</div>
+        <p>Securing Uniswap v4 on Unichain with community-driven "Circuit Breakers."</p>
+        <p style="color: #9ca3af;">Transforming MEV from an extractive force into a positive-sum community defense mechanism.</p>
+    </div>
+</div>
+
+<!-- Slide 2: The Problem -->
+<div class="slide-container" id="slide2" style="align-items: center;">
+    <h2 class="slide-title">The <span class="highlight-red">Problem</span>: Extractive MEV</h2>
+    <p class="slide-description">Predatory sandwich attacks siphon billions annually, hurting retail liquidity providers.</p>
+    
+    <div class="tree">
+        <div class="t-root">
+            <h3>The Invisible Tax</h3>
+            <p>$1B+ Annual Extraction</p>
+        </div>
+        <div class="t-stem"></div>
+        <div class="t-bar-container">
+            <div class="t-bar"></div>
+            <div class="t-drop-left"></div>
+            <div class="t-drop-mid"></div>
+            <div class="t-drop-right"></div>
+        </div>
+        <div class="t-branches">
+            <div class="t-branch">
+                <i class="fa-solid fa-skull-crossbones"></i>
+                <h4>Predatory Bots</h4>
+                <p>Flash-loan powered bots front-run and back-run every significant swap, bleeding LPs dry.</p>
+            </div>
+            <div class="t-branch">
+                <i class="fa-solid fa-hourglass" style="color: #ff3b30;"></i>
+                <h4 style="border-color: rgba(255,59,48,0.3); color: #ff3b30;">Slow Defense</h4>
+                <p>Existing manual 'Panic Switches' require keepers or governance, making them useless in 200ms blocks.</p>
+            </div>
+            <div class="t-branch">
+                <i class="fa-solid fa-faucet-drip"></i>
+                <h4>Value Leakage</h4>
+                <p>Value flows OUT of the ecosystem to searchers, rather than STAYING with users or LPs.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 3: The Solution -->
+<div class="slide-container" id="slide3" style="align-items: center;">
+    <h2 class="slide-title">The <span class="highlight-green">Solution</span>: MEVengers Sentinel</h2>
+    <p class="slide-description">A multi-layered autonomous defense that detects, locks, and settles at block speed.</p>
+    
+    <div class="tree">
+        <div class="t-root green">
+            <h3>Autonomous Circuit Breaker</h3>
+            <p>Detection & Intervention Engine</p>
+        </div>
+        <div class="t-stem green"></div>
+        <div class="t-bar-container">
+            <div class="t-bar green"></div>
+            <div class="t-drop-left green"></div>
+            <div class="t-drop-mid green"></div>
+            <div class="t-drop-right green"></div>
+        </div>
+        <div class="t-branches">
+            <div class="t-branch green-box">
+                <i class="fa-solid fa-anchor"></i>
+                <h4>Uniswap v4 Hook</h4>
+                <p>The Sentinel Hook monitors volume frequency to detect MEV signatures *before* execution.</p>
+            </div>
+            <div class="t-branch pink-box">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <h4>Reactive Network</h4>
+                <p>Autonomous cross-chain sentinel that catches alerts and instantly triggers a pool lock.</p>
+            </div>
+            <div class="t-branch">
+                <i class="fa-solid fa-comments"></i>
+                <h4>Telegram Guardian</h4>
+                <p>Community defenders set 'Safe Fees' via a gamified protective auction, earning insurance rewards.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 4: Architecture Sequence -->
+<div class="slide-container" id="slide4">
+    <h2 class="slide-title"><span class="highlight-blue">Architecture</span> Sequence</h2>
+    
+    <div class="content-area">
+        <div class="arch-container">
+            <svg class="arch-svg" viewBox="0 0 1160 450">
+                <defs>
+                    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#00ff66"/></marker>
+                    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#007aff"/></marker>
+                    <marker id="arrow-pink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ff007a"/></marker>
+                </defs>
+                <path d="M 270 130 L 460 130" class="flow-line solid" stroke="#00ff66"/>
+                <path d="M 270 130 L 460 130" class="flow-line" stroke="#00ff66" marker-end="url(#arrow-green)"/>
+                <path d="M 700 150 L 890 150" class="flow-line solid" stroke="#007aff"/>
+                <path d="M 700 150 L 890 150" class="flow-line" stroke="#007aff" marker-end="url(#arrow-blue)"/>
+                <path d="M 1010 230 C 1010 380, 850 380, 700 380" class="flow-line solid" stroke="#ff007a"/>
+                <path d="M 1010 230 C 1010 380, 850 380, 700 380" class="flow-line" stroke="#ff007a" marker-end="url(#arrow-pink)"/>
+                <path d="M 560 300 L 560 230" class="flow-line solid" stroke="#ff007a"/>
+                <path d="M 560 300 L 560 230" class="flow-line" stroke="#ff007a" marker-end="url(#arrow-pink)"/>
+                <path d="M 600 230 L 600 300" class="flow-line solid" stroke="#00ff66"/>
+                <path d="M 600 230 L 600 300" class="flow-line" stroke="#00ff66" marker-end="url(#arrow-green)"/>
+            </svg>
+            <div class="arch-label" style="top: 105px; left: 365px; color: #00ff66; border-color: rgba(0,255,102,0.3); background: rgba(0,255,102,0.1);">1. Swap Signature Detect</div>
+            <div class="arch-label" style="top: 125px; left: 795px; color: #007aff; border-color: rgba(0,122,255,0.3); background: rgba(0,122,255,0.1);">2. Reactive Catch & Lock</div>
+            <div class="arch-label" style="top: 380px; left: 880px; color: #ff007a; border-color: rgba(255,0,122,0.3); background: rgba(255,0,122,0.1);">3. Alert Guardians</div>
+            <div class="arch-label" style="top: 265px; left: 470px; color: #ff007a; border-color: rgba(255,0,122,0.3); background: rgba(255,0,122,0.1);">4. Bidding (Safe Fee)</div>
+            <div class="arch-label" style="top: 265px; left: 690px; color: #00ff66; border-color: rgba(0,255,102,0.3); background: rgba(0,255,102,0.1);">5. Autonomous Settle</div>
+            <div class="arch-node human">
+                <div class="node-icon"><i class="fa-solid fa-users"></i></div>
+                <h4 style="color: #fff;">Unichain User</h4>
+                <p>Target Victim</p>
+            </div>
+            <div class="arch-node hook">
+                <div class="node-icon highlight-green"><i class="fa-solid fa-shield"></i></div>
+                <h4 class="highlight-green">MEVengers Hook</h4>
+                <p>Uniswap v4 Detection</p>
+            </div>
+            <div class="arch-node sentinel">
+                <div class="node-icon highlight-blue"><i class="fa-solid fa-satellite"></i></div>
+                <h4 class="highlight-blue">Reactive Sentinel</h4>
+                <p>Autonomous Coordinator</p>
+            </div>
+            <div class="arch-node agent">
+                <div class="node-icon highlight-pink"><i class="fa-solid fa-robot"></i></div>
+                <h4 class="highlight-pink">Guardian Bot</h4>
+                <p>Telegram Governance</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 5: Comparison -->
+<div class="slide-container" id="slide5" style="align-items: center;">
+    <h2 class="slide-title">Unichain <span class="highlight-pink">Comparison</span></h2>
+    <p class="slide-description">How MEVengers outpaces traditional and passive MEV protection.</p>
+    
+    <div class="content-area" style="max-width: 1000px;">
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th class="vs-column">VS</th>
+                    <th>MEVengers (V4 Hook)</th>
+                    <th>Traditional AMMs</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Intervention Speed</strong></td>
+                    <td class="vs-column"></td>
+                    <td><span class="highlight-green">Block-Split</span> (Sentinel lock)</td>
+                    <td><span class="highlight-red">None</span> (Wait for tx)</td>
+                </tr>
+                <tr>
+                    <td><strong>User Effort</strong></td>
+                    <td class="vs-column"></td>
+                    <td><span class="highlight-green">Zero-Config</span> (Pool level)</td>
+                    <td><span class="highlight-red">Complex</span> (Custom RPCs)</td>
+                </tr>
+                <tr>
+                    <td><strong>Insurance Model</strong></td>
+                    <td class="vs-column"></td>
+                    <td><span class="highlight-green">Autonomous Fund</span> (Rebates)</td>
+                    <td><span class="highlight-red">None</span> (Value is lost)</td>
+                </tr>
+                <tr>
+                    <td><strong>Community Role</strong></td>
+                    <td class="vs-column"></td>
+                    <td><span class="highlight-green">Guardians</span> (Bidding/Rep)</td>
+                    <td><span class="highlight-red">Passive</span> (Vulnerable LPs)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Slide 6: Code Walkthrough -->
+<div class="slide-container full-bg-image" id="slide6" style="background-color: #080c14; background-image: radial-gradient(circle at 50% 50%, rgba(0, 255, 102, 0.05), transparent 60%);">
+    <div class="content-overlay" style="background: transparent;">
+        <i class="fa-solid fa-code-branch" style="font-size: 80px; color: #00ff66; margin-bottom: 30px;"></i>
+        <h2 style="font-size: 64px; margin-bottom: 20px;">Code Deep Dive</h2>
+        <p style="font-size: 24px; color: #d1d5db; max-width: 800px; margin-bottom: 40px;">
+            The Sentinel Hook: Where logic meets autonomous security.
+        </p>
+        
+        <div style="display: flex; gap: 40px; margin-top: 20px; width: 100%; max-width: 1000px;">
+            <div style="flex: 1; background: rgba(17,24,39,0.9); padding: 30px; border-radius: 12px; border: 1px solid #00ff66; text-align: left;">
+                <h4 style="color: #00ff66; margin-bottom: 10px; font-size: 24px;">1. Sentinel Detection</h4>
+                <p style="color: #d1d5db; margin: 0 0 15px 0; font-weight: 600;">Custom <code style="color:#fff; background: rgba(0,255,102,0.2); padding: 2px 6px; border-radius: 4px;">_beforeSwap</code></p>
+                <ul style="color: #9ca3af; font-size: 16px; margin-left: 20px; line-height: 1.6;">
+                    <li>Detect volume frequency spikes within a 2-minute window.</li>
+                    <li>Emit the <code>MEVAlert</code> event used by the Reactive Network.</li>
+                    <li>Enforce the transition to 'Locked' state on-chain.</li>
+                </ul>
+            </div>
+            <div style="flex: 1; background: rgba(17,24,39,0.9); padding: 30px; border-radius: 12px; border: 1px solid #007aff; text-align: left;">
+                <h4 style="color: #007aff; margin-bottom: 10px; font-size: 24px;">2. Reactive Callback</h4>
+                <p style="color: #d1d5db; margin: 0 0 15px 0; font-weight: 600;">Autonomous Settlement</p>
+                <ul style="color: #9ca3af; font-size: 16px; margin-left: 20px; line-height: 1.6;">
+                    <li>The Reactive Sentinel tracks the auction timer autonomously.</li>
+                    <li>Dispatches the <code>settleAuctionAndUnlock</code> callback.</li>
+                    <li>Links bidding premium directly to the Insurance Fund.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="action-callout" style="border-left-color: #ff007a; background: linear-gradient(90deg, rgba(255, 0, 122, 0.2), transparent); margin-top: 50px; width: 100%; max-width: 1000px; text-align: left;">
+            <p style="margin: 0; color: #fff; font-size: 20px;"><strong><i class="fa-solid fa-keyboard" style="margin-right: 10px;"></i> Presenter Action:</strong> Show line 145 in <code>MEVengersHook.sol</code> for locking logic.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 7: Live Demo -->
+<div class="slide-container full-bg-image" id="slide7" style="background-color: #080c14; background-image: radial-gradient(circle at 50% 50%, rgba(255, 0, 122, 0.05), transparent 60%);">
+    <div class="content-overlay" style="background: transparent;">
+        <i class="fa-solid fa-bolt" style="font-size: 80px; color: #ff007a; margin-bottom: 30px;"></i>
+        <h2 style="font-size: 64px; margin-bottom: 20px;">Live Defense Demo</h2>
+        <p style="font-size: 24px; color: #d1d5db; max-width: 800px; margin-bottom: 40px;">
+            The pool is under attack. The Sentinel is ready. Let's see the MEVengers in action.
+        </p>
+        
+        <div class="action-callout" style="margin-top: 20px; border-left-color: #00ff66; background: linear-gradient(90deg, rgba(0, 255, 102, 0.1), transparent);">
+            <p style="margin: 0; color: #fff; font-size: 24px;"><strong><i class="fa-solid fa-play" style="margin-right: 10px;"></i> DEFENSE INITIATED</strong></p>
+            <p style="margin: 10px 0 0 0; color: #9ca3af; font-size: 18px;">Switching to MEVengers Dashboard & Telegram Bot</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Presentation Logic
+    let currentSlide = 1;
+    const totalSlides = 7;
+
+    function showSlide(slideIndex) {
+        document.querySelectorAll('.slide-container').forEach(slide => {
+            slide.classList.remove('active');
+        });
+        document.getElementById('slide' + slideIndex).classList.add('active');
+        document.getElementById('current-slide').innerText = slideIndex;
+    }
+
+    function nextSlide() {
+        if (currentSlide < totalSlides) {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlide > 1) {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+        else if (e.key === 'ArrowLeft') prevSlide();
+    });
+</script>
+
+</body>
+</html>

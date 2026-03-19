@@ -438,31 +438,36 @@ const queries = new ContractQueries(publicClient, MEV_HOOK_ADDRESS);
 
 bot.onText(/\/start/, (msg) => {
     bot.sendMessage(msg.chat.id, `
-🛡️ **Welcome to MEVengers**
+🛡️ **MEVengers: Protocol Activated**
 
-I am your portal to the world's first autonomous MEV protection network. I monitor Uniswap V4 pools for malicious extraction and empower **YOU** to become a Guardian of the Unichain.
+Welcome, Guardian. You have just entered the first autonomous defense network for Unichain. I am the Sentinel Interface.
 
-📱 **How it works:**
-1. Connect your wallet persona.
-2. Receive alerts when a pool is under attack.
-3. Bid in the "Protective Auction" to establish safe fees.
-4. Earn rewards and build your reputation as a Defender.
+🔹 **My Mission:** Monitor Uniswap V4, detect predatory MEV extraction, and coordinate community-led counter-strikes.
+🔹 **Your Mission:** Protect the pools, set safe fees, and earn rewards.
 
-🚀 **Get started:** /connect
+🚀 **Quick Start:**
+1. Type /connect to link your demo persona.
+2. Type /help to see all available tactical commands.
+3. Wait for the signal... when a pool is locked, the auction begins.
+
+*Ready to defend? Run /connect now.*
     `, { parse_mode: 'Markdown' });
 });
 
 bot.onText(/\/help/, (msg) => {
     bot.sendMessage(msg.chat.id, `
-📘 **Guardian Commands**
+📖 **Sentinel Tactical Manual**
 
-/connect - Link your wallet to a Guardian persona
-/balance - Check your current ETH reserves
-/status - View details of the active auction
-/trigger - Start a real on-chain demo (Unichain Sepolia)
-/simulate - Test the interface with a simulated event
+Essential commands for every Guardian:
 
-*For testing: Run /connect then /simulate to see the Guardian workflow.*
+👤 /connect - Link your wallet to a pre-funded demo persona
+💰 /balance - Check your current ETH reserves on Unichain
+📊 /status - View details of the active protective auction
+⚡ /trigger - Dispatch a real on-chain MEV attack (Developer only)
+🧪 /simulate - Run a local UI simulation of the Guardian flow
+
+**Common Question:** *"How do I win?"*
+When you see a 🚨 **SUSPICIOUS ACTIVITY** alert, click the **"Become a Guardian"** button immediately. The Sentinel tracks the auction and will notify you if your bid secures the pool!
     `, { parse_mode: 'Markdown' });
 });
 
