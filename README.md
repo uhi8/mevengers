@@ -5,6 +5,14 @@
 
 ---
 
+## 🔗 Live Deployments (Judge Hub)
+- **Interactive Pitch & Demo**: [mevengers.vercel.app/presentation.html](https://mevengers-presentation.vercel.app/presentation.html) *(Coming Soon / Example)*
+- **Telegram Guardian Bot**: [@MEVengers_Protection_bot](https://t.me/MEVengers_Protection_bot) 🛡️
+- **AI Sentinel Hub**: [tender-imagination-production-982a.up.railway.app](https://tender-imagination-production-982a.up.railway.app)
+- **Unichain Sepolia Hook**: `0x756751bE0FD74cdbB7af4410ca3aB4C02372c0c0`
+
+---
+
 ## 📖 Table of Contents
 - [Overview](#overview)
 - [The Problem](#the-problem)

@@ -2,23 +2,37 @@
 
 import { useState, useEffect } from "react";
 
-const TELEGRAM_BOT_URL = "https://t.me/MEVengers_Protection_bot";
+const TELEGRAM_LINK = "https://t.me/MEVengers_Protection_bot";
 const GITHUB_URL = "https://github.com/uhi8/mevengers";
+const AGENT_API_URL = process.env.NEXT_PUBLIC_AGENT_URL || "https://tender-imagination-production-982a.up.railway.app";
+const BOT_STATUS_URL = process.env.NEXT_PUBLIC_BOT_URL || "https://mevengers-production.up.railway.app";
 
 export default function Home() {
   const [isLocked, setIsLocked] = useState(false);
   const [bidValue, setBidValue] = useState("0.000");
   const [countdown, setCountdown] = useState(180);
 
-  const triggerSimulation = () => {
+  const triggerSimulation = async () => {
     setIsLocked(true);
     setCountdown(180);
     setBidValue("0.000");
+
+    try {
+      // Call the live Bot API to trigger a real on-chain MEV attack (demo mode)
+      const response = await fetch(`${BOT_STATUS_URL}/trigger-attack`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await response.json();
+      console.log("🚀 Sentinel Triggered:", data);
+    } catch (e) {
+      console.error("❌ Failed to trigger live sentinel:", e);
+    }
     
-    // Auto-bid after 3 seconds to show community response
+    // Auto-bid simulation for UI impact
     setTimeout(() => {
       setBidValue("0.001 ETH");
-    }, 3000);
+    }, 4500);
   };
 
   useEffect(() => {
@@ -53,7 +67,7 @@ export default function Home() {
           <div className="flex items-center gap-4">
             <a href={GITHUB_URL} target="_blank" className="text-sm font-medium text-slate-400 transition hover:text-white">GitHub</a>
             <a
-              href={TELEGRAM_BOT_URL}
+              href={TELEGRAM_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-xl bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-400 ring-1 ring-emerald-500/20 transition hover:bg-emerald-500/20"

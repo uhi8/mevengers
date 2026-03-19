@@ -10,7 +10,13 @@ const { privateKeyToAccount } = require("viem/accounts");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
+const express = require("express");
+const cors = require("cors");
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
+
+const app = express();
+app.use(cors());
+app.use(express.json());
 
 // ─── Configuration ──────────────────────────────────────────────────
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -818,3 +824,29 @@ Hash: \`${retryHash}\`
 monitor.startMonitoring();
 console.log("🤖 MEVengers Bot is running...");
 setInterval(() => console.log("💓 Heartbeat..."), 60000);
+
+// ─── HTTP API for Frontend Trigger ──────────────────────────────────
+app.post("/trigger-attack", async (req, res) => {
+    console.log("⚡ HTTP Trigger: Initiating MEV Attack...");
+    try {
+        const hash = await settlementClient.writeContract({
+            address: MEV_HOOK_ADDRESS,
+            abi: HOOK_ABI,
+            functionName: "lockPool",
+            args: [parseEther("1")] // Trigger with 1 ETH vol simulation
+        });
+
+        // Broadcast to all known chats if needed, but for now just return success
+        // In a real hackathon demo, we'd trigger a broadcast here.
+        
+        res.json({ success: true, hash, txUrl: `https://sepolia.uniscan.xyz/tx/${hash}` });
+    } catch (e) {
+        console.error("❌ HTTP Trigger Error:", e);
+        res.status(500).json({ success: false, error: e.message });
+    }
+});
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+    console.log(`🚀 Sentinel API active on port ${PORT}`);
+});
