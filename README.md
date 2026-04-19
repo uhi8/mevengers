@@ -174,4 +174,4 @@ npm run start
 
 ---
 
-**Built for the future of Ethereum. Developed for Unichain & Reactive Network.** ⚡🛡️
+**Built for the future of Ethereum. Developed for Unichain & Reactive Network.
